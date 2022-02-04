@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('coingateClient', function () {
+            return new \Balda38\CoingateExchangeClient\Client();
+        });
     }
 
     /**
