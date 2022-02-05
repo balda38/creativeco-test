@@ -55,6 +55,8 @@ services:
         restart: unless-stopped
         networks:
             - sail
+        depends_on:
+            - postgres
 networks:
     sail:
         driver: bridge
