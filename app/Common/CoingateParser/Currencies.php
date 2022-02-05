@@ -6,6 +6,8 @@ use App\Common\Database;
 
 use App\Models\Currency;
 
+use Illuminate\Support\Carbon;
+
 class Currencies extends Parser
 {
     protected static function getClientOperation() : string
@@ -13,15 +15,28 @@ class Currencies extends Parser
         return 'getCurrencies';
     }
 
-    public static function parse() : void
+    protected static function validationRules(): array
     {
-        $data = parent::getData();
+        return [
+            '*.title' => 'required|string',
+            '*.symbol' => 'required|string',
+            '*.disabled' => 'required|boolean',
+        ];
+    }
+
+    protected static function process(array $data) : void
+    {
         Database::makeTransaction(function () use ($data) {
+            $now = Carbon::now();
             foreach ($data as $currency) {
                 $model = self::getModel($currency['symbol']);
                 $model->name = $currency['title'];
                 $model->code = $currency['symbol'];
                 $model->archived = $currency['disabled'];
+                if (!$model->exists) {
+                    $model->created_at = $now;
+                }
+                $model->updated_at = $now;
                 $model->save();
             }
 
@@ -45,8 +60,7 @@ class Currencies extends Parser
      */
     private static function markArchive(array $data) : void
     {
-        $data = collect($data);
-        $currencyCodes = $data->pluck(['symbol']);
+        $currencyCodes = collect($data)->pluck(['symbol']);
         Currency::whereNotIn('code', $currencyCodes)->update(['archived' => true]);
     }
 }

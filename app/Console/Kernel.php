@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('currencies:parse')->cron('*/30 0 0 * * *');
+        $schedule->command('parse:currencies')->cron('0 0 * * *');
+        $schedule->command('parse:exchangeRates')->cron('* * * * *');
     }
 
     /**

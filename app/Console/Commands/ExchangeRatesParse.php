@@ -4,33 +4,23 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Common\CoingateParser\Currencies;
+use App\Common\CoingateParser\ExchangeRates;
 
-class ParseCurrencies extends Command
+class ExchangeRatesParse extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'currencies:parse';
+    protected $signature = 'parse:exchangeRates';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Parse data about currencies';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Parse data about exchange rates';
 
     /**
      * Execute the console command.
@@ -39,7 +29,7 @@ class ParseCurrencies extends Command
      */
     public function handle()
     {
-        Currencies::parse();
+        ExchangeRates::parse();
 
         return 0;
     }
