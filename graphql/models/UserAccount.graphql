@@ -6,6 +6,7 @@ type UserAccount {
     #Relations
     user: User! @belongsTo
     currency: Currency! @belongsTo
+    buyTasks: [UserAccountBuyTask!]! @hasMany
 }
 
 input createUserAccountInput {
@@ -69,5 +70,5 @@ extend type Mutation {
                 idArg: "id"
             }
         )
-        @validator(class: "App\\GraphQL\\Validators\\TopUpUserAccountValidator")
+        @validator(class: "App\\GraphQL\\Validators\\TopUpUserAccount")
 }

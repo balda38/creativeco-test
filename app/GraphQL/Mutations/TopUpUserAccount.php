@@ -12,7 +12,7 @@ class TopUpUserAccount
      */
     public function __invoke($_, array $args)
     {
-        $account = UserAccount::find($args['user_account_id']);
+        $account = UserAccount::find($args['id']);
         $account->value += $args['value'];
         $account->save();
 

@@ -1,0 +1,73 @@
+type UserAccountBuyTask {
+    id: ID!
+    value: Float!
+    created_at: DateTime!
+    buy_before: DateTime
+    completed_at: DateTime
+    #Relations
+    userAccount: UserAccount! @belongsTo
+    currency: Currency! @belongsTo
+}
+
+input createUserAccountBuyTaskInput {
+    user_account_id: ID!
+    currency_id: ID!
+    value: Float!
+    buy_before: DateTime
+}
+
+extend type Query {
+    userAccountBuyTask(id: ID! @eq): UserAccountBuyTask
+        @find
+        @guard(with: ["api"])
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {
+                queryByModel: "UserAccountBuyTask"
+                idArg: "id"
+            }
+        )
+
+    userAccountBuyTasks(
+        user_account_id: ID! @where(operator: "=")
+    ): [UserAccountBuyTask!]!
+        @guard(with: ["api"])
+        @paginate(defaultCount: 10)
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {
+                queryByModel: "UserAccount"
+                idArg: "user_account_id"
+            }
+        )
+}
+
+extend type Mutation {
+    createUserAccountBuyTask(input: createUserAccountBuyTaskInput @spread): UserAccountBuyTask
+        @create
+        @guard(with: ["api"])
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {
+                queryByModel: "UserAccount"
+                idArg: "user_account_id"
+            }
+        )
+        @validator(class: "App\\GraphQL\\Validators\\CreateUserAccountBuyTask")
+
+    deleteUserAccountBuyTask(id: ID! @eq): UserAccountBuyTask
+        @delete
+        @guard(with: ["api"])
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {
+                queryByModel: "UserAccountBuyTask"
+                idArg: "id"
+            }
+        )
+        @validator(class: "App\\GraphQL\\Validators\\DeleteUserAccountBuyTask")
+}

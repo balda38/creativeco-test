@@ -4,7 +4,7 @@ namespace App\GraphQL\Validators;
 
 use Nuwave\Lighthouse\Validation\Validator;
 
-class TopUpUserAccountValidator extends Validator
+class TopUpUserAccount extends Validator
 {
     public function rules() : array
     {

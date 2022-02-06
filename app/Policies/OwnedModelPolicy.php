@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\UserAccount;
+use App\Models\UserAccountBuyTask;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -28,6 +29,12 @@ class OwnedModelPolicy
                     }
 
                     return isset($userAccount) && $user->id === $userAccount->getOwner()->id;
+                case class_basename(UserAccountBuyTask::class):
+                    if (isset($injectedArgs[$idKey])) {
+                        $userAccountBuyTask = UserAccountBuyTask::find($injectedArgs[$idKey]);
+                    }
+
+                    return isset($userAccountBuyTask) && $user->id === $userAccountBuyTask->getOwner()->id;
             }
         }
 
