@@ -1,0 +1,2 @@
+#import scalars.graphql
+#import models/*.graphql
