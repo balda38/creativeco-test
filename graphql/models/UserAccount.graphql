@@ -14,8 +14,36 @@ input createUserAccountInput {
 }
 
 input topUpUserAccount {
-    user_account_id: ID!
+    id: ID!
     value: Float!
+}
+
+extend type Query {
+    userAccount(id: ID! @eq): UserAccount
+        @find
+        @guard(with: ["api"])
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {
+                queryByModel: "UserAccount"
+                idArg: "id"
+            }
+        )
+
+    userAccounts(
+        user_id: ID! @where(operator: "=")
+    ): [UserAccount!]!
+        @guard(with: ["api"])
+        @paginate(defaultCount: 10)
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {
+                queryByModel: "User"
+                idArg: "user_id"
+            }
+        )
 }
 
 extend type Mutation {
@@ -25,7 +53,10 @@ extend type Mutation {
         @can(
             ability: "graphql"
             injectArgs: "true"
-            args: {queryByModel: "User"}
+            args: {
+                queryByModel: "User"
+                idArg: "user_id"
+            }
         )
 
     topUpUserAccount(input: topUpUserAccount @spread): UserAccount
@@ -33,7 +64,10 @@ extend type Mutation {
         @can(
             ability: "graphql"
             injectArgs: "true"
-            args: {queryByModel: "UserAccount"}
+            args: {
+                queryByModel: "UserAccount"
+                idArg: "id"
+            }
         )
         @validator(class: "App\\GraphQL\\Validators\\TopUpUserAccountValidator")
 }

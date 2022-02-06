@@ -12,18 +12,19 @@ class OwnedModelPolicy
     use HandlesAuthorization;
 
     /**
-     * Specifies that user can create models.
+     * Specifies that user can manipulate models.
      */
     public function graphql(User $user, array $injectedArgs = null, array $staticArgs = null) : bool
     {
-        if (is_array($staticArgs) && isset($staticArgs['queryByModel'])) {
+        if (is_array($staticArgs) && isset($staticArgs['queryByModel']) && isset($staticArgs['idArg'])) {
             $queryByModel = $staticArgs['queryByModel'];
+            $idKey = $staticArgs['idArg'];
             switch ($queryByModel) {
                 case class_basename(User::class):
-                    return isset($injectedArgs['user_id']) && $user->id === (int) $injectedArgs['user_id'];
+                    return isset($injectedArgs[$idKey]) && $user->id === (int) $injectedArgs[$idKey];
                 case class_basename(UserAccount::class):
-                    if (isset($injectedArgs['user_account_id'])) {
-                        $userAccount = UserAccount::find($injectedArgs['user_account_id']);
+                    if (isset($injectedArgs[$idKey])) {
+                        $userAccount = UserAccount::find($injectedArgs[$idKey]);
                     }
 
                     return isset($userAccount) && $user->id === $userAccount->getOwner()->id;
