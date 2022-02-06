@@ -17,7 +17,7 @@ class CreateCurrenciesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->boolean('archived');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCurrenciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('currency');
+        Schema::dropIfExists('currencies');
     }
 }
