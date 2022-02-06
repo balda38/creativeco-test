@@ -6,3 +6,7 @@ type Currency {
     created_at: DateTime!
     updated_at: DateTime!
 }
+
+extend type Query {
+    tradedCurrencies: [Currency!]! @guard(with: "api")
+}
