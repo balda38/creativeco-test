@@ -2,11 +2,10 @@
 
 namespace App\Common\CoingateParser;
 
-use App\Common\Database;
-
 use App\Models\Currency;
 use App\Models\CurrencyExchangeRate;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
 class ExchangeRates extends Parser
@@ -25,7 +24,7 @@ class ExchangeRates extends Parser
 
     protected static function process(array $data) : void
     {
-        Database::makeTransaction(function () use ($data) {
+        DB::transaction(function () use ($data) {
             $now = Carbon::now();
             $currencies = Currency::isArchived(false)->get(['id', 'code']);
             if ($currencies->isEmpty()) {

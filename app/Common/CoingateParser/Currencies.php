@@ -2,10 +2,9 @@
 
 namespace App\Common\CoingateParser;
 
-use App\Common\Database;
-
 use App\Models\Currency;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
 class Currencies extends Parser
@@ -26,7 +25,7 @@ class Currencies extends Parser
 
     protected static function process(array $data) : void
     {
-        Database::makeTransaction(function () use ($data) {
+        DB::transaction(function () use ($data) {
             $now = Carbon::now();
             foreach ($data as $currency) {
                 $model = self::getModel($currency['symbol']);
