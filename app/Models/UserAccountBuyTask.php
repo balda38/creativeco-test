@@ -6,6 +6,7 @@ use App\Contracts\OwnedModel;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Support\Carbon;
 
@@ -22,6 +23,8 @@ use Illuminate\Support\Carbon;
  */
 class UserAccountBuyTask extends Model implements OwnedModel
 {
+    use HasFactory;
+
     const UPDATED_AT = null;
 
     /**
