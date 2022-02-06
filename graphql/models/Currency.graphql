@@ -1,0 +1,8 @@
+type Currency {
+    id: ID!
+    name: String!
+    code: String!
+    archived: Boolean!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

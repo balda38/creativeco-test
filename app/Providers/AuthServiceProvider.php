@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\OwnedModel;
+use App\Policies\OwnedModelPolicy;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -13,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        OwnedModel::class => OwnedModelPolicy::class,
     ];
 
     /**

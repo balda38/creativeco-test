@@ -1,0 +1,39 @@
+type UserAccount {
+    id: ID!
+    value: Float!
+    created_at: DateTime!
+    updated_at: DateTime!
+    #Relations
+    user: User! @belongsTo
+    currency: Currency! @belongsTo
+}
+
+input createUserAccountInput {
+    user_id: ID!
+    currency_id: ID!
+}
+
+input topUpUserAccount {
+    user_account_id: ID!
+    value: Float!
+}
+
+extend type Mutation {
+    createUserAccount(input: createUserAccountInput @spread): UserAccount
+        @create
+        @guard(with: ["api"])
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {queryByModel: "User"}
+        )
+
+    topUpUserAccount(input: topUpUserAccount @spread): UserAccount
+        @guard(with: ["api"])
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {queryByModel: "UserAccount"}
+        )
+        @validator(class: "App\\GraphQL\\Validators\\TopUpUserAccountValidator")
+}
