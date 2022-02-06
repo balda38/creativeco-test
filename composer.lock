@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:balda38/coingate-exchange-client.git",
-                "reference": "83175ffa0d5bfa17bd1af028953f5e2adc4cec80"
+                "reference": "7d8ab57bfd83407bb49b3cbc33b17e2f954c65b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/balda38/coingate-exchange-client/zipball/83175ffa0d5bfa17bd1af028953f5e2adc4cec80",
-                "reference": "83175ffa0d5bfa17bd1af028953f5e2adc4cec80",
+                "url": "https://api.github.com/repos/balda38/coingate-exchange-client/zipball/7d8ab57bfd83407bb49b3cbc33b17e2f954c65b1",
+                "reference": "7d8ab57bfd83407bb49b3cbc33b17e2f954c65b1",
                 "shasum": ""
             },
             "require": {
@@ -105,7 +105,7 @@
                 "source": "https://github.com/balda38/coingate-exchange-client/tree/main",
                 "issues": "https://github.com/balda38/coingate-exchange-client/issues"
             },
-            "time": "2022-02-04T11:30:10+00:00"
+            "time": "2022-02-06T16:18:38+00:00"
         },
         {
             "name": "brick/math",
