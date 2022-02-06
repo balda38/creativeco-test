@@ -6,5 +6,5 @@ use App\Models\User;
 
 interface OwnedModel
 {
-    public function getOwner() : User;
+    public function getOwner(): User;
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 
 class ExchangeRates extends Parser
 {
-    protected static function getClientOperation() : string
+    protected static function getClientOperation(): string
     {
         return 'getExchangeRates';
     }
@@ -22,7 +22,7 @@ class ExchangeRates extends Parser
         ];
     }
 
-    protected static function process(array $data) : void
+    protected static function process(array $data): void
     {
         DB::transaction(function () use ($data) {
             $now = Carbon::now();
@@ -55,7 +55,7 @@ class ExchangeRates extends Parser
         });
     }
 
-    private static function getModel(Currency $fromCurrency, Currency $toCurrency) : CurrencyExchangeRate
+    private static function getModel(Currency $fromCurrency, Currency $toCurrency): CurrencyExchangeRate
     {
         $exchangeRateModel = CurrencyExchangeRate::forFromCurrency($fromCurrency)
             ->forToCurrency($toCurrency)

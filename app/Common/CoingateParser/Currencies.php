@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 
 class Currencies extends Parser
 {
-    protected static function getClientOperation() : string
+    protected static function getClientOperation(): string
     {
         return 'getCurrencies';
     }
@@ -23,7 +23,7 @@ class Currencies extends Parser
         ];
     }
 
-    protected static function process(array $data) : void
+    protected static function process(array $data): void
     {
         DB::transaction(function () use ($data) {
             $now = Carbon::now();
@@ -43,7 +43,7 @@ class Currencies extends Parser
         });
     }
 
-    private static function getModel(string $currencyCode) : Currency
+    private static function getModel(string $currencyCode): Currency
     {
         $currencyModel = Currency::firstWhere('code', $currencyCode);
         if (!$currencyModel) {
@@ -57,7 +57,7 @@ class Currencies extends Parser
      * Mark existing in database, but not existing in Coingate currencies
      * as archived.
      */
-    private static function markArchive(array $data) : void
+    private static function markArchive(array $data): void
     {
         $currencyCodes = collect($data)->pluck(['symbol']);
         Currency::whereNotIn('code', $currencyCodes)->update(['archived' => true]);

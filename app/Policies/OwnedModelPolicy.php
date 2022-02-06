@@ -15,7 +15,7 @@ class OwnedModelPolicy
     /**
      * Specifies that user can manipulate models.
      */
-    public function graphql(User $user, array $injectedArgs = null, array $staticArgs = null) : bool
+    public function graphql(User $user, array $injectedArgs = null, array $staticArgs = null): bool
     {
         if (is_array($staticArgs) && isset($staticArgs['queryByModel']) && isset($staticArgs['idArg'])) {
             $queryByModel = $staticArgs['queryByModel'];

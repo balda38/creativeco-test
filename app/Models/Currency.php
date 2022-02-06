@@ -48,7 +48,7 @@ class Currency extends Model
         return $this->hasMany(CurrencyExchangeRates::class, 'to_currency_id');
     }
 
-    public function scopeIsArchived(Builder $query, bool $archived) : Builder
+    public function scopeIsArchived(Builder $query, bool $archived): Builder
     {
         return $query->where('archived', '=', $archived);
     }

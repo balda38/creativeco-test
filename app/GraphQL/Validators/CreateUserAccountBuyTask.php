@@ -6,7 +6,7 @@ use Nuwave\Lighthouse\Validation\Validator;
 
 class CreateUserAccountBuyTask extends Validator
 {
-    public function rules() : array
+    public function rules(): array
     {
         return [
             'input.value' => ['required', 'numeric', 'gt:0'],

@@ -8,7 +8,7 @@ use Nuwave\Lighthouse\Validation\Validator;
 
 class DeleteUserAccountBuyTask extends Validator
 {
-    public function rules() : array
+    public function rules(): array
     {
         return [
             'id' => [

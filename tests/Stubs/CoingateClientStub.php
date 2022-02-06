@@ -4,7 +4,7 @@ namespace Tests\Stubs;
 
 class CoingateClientStub
 {
-    public function getCurrencies() : array
+    public function getCurrencies(): array
     {
         return [
             [
@@ -15,7 +15,7 @@ class CoingateClientStub
         ];
     }
 
-    public function getExchangeRates() : array
+    public function getExchangeRates(): array
     {
         return [
             'USD' => [

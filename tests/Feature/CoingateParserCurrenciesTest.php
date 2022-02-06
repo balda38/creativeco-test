@@ -20,7 +20,7 @@ class CoingateParserCurrenciesTest extends TestCase
      */
     private $currency;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +33,7 @@ class CoingateParserCurrenciesTest extends TestCase
         });
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         parent::tearDown();
 

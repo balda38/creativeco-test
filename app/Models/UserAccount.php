@@ -47,12 +47,12 @@ class UserAccount extends Model implements OwnedModel
         return $this->belongsTo(Currency::class);
     }
 
-    public function scopeForUser(Builder $query, User $user) : Builder
+    public function scopeForUser(Builder $query, User $user): Builder
     {
         return $query->where('user_id', '=', $user->id);
     }
 
-    public function scopeForCurrency(Builder $query, Currency $currency) : Builder
+    public function scopeForCurrency(Builder $query, Currency $currency): Builder
     {
         return $query->where('currency_id', '=', $currency->id);
     }
