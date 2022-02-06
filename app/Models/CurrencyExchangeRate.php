@@ -47,12 +47,12 @@ class CurrencyExchangeRate extends Model
         return $this->belongsTo(Currency::class, 'to_currency_id');
     }
 
-    public function scopeFromCurrency(Builder $query, Currency $currency) : Builder
+    public function scopeForFromCurrency(Builder $query, Currency $currency) : Builder
     {
         return $query->where('from_currency_id', '=', $currency->id);
     }
 
-    public function scopeToCurrency(Builder $query, Currency $currency) : Builder
+    public function scopeForToCurrency(Builder $query, Currency $currency) : Builder
     {
         return $query->where('to_currency_id', '=', $currency->id);
     }

@@ -57,9 +57,8 @@ class ExchangeRates extends Parser
 
     private static function getModel(Currency $fromCurrency, Currency $toCurrency) : CurrencyExchangeRate
     {
-        $exchangeRateModel = CurrencyExchangeRate::select()
-            ->fromCurrency($fromCurrency)
-            ->toCurrency($toCurrency)
+        $exchangeRateModel = CurrencyExchangeRate::forFromCurrency($fromCurrency)
+            ->forToCurrency($toCurrency)
             ->first();
         if (!$exchangeRateModel) {
             $exchangeRateModel = new CurrencyExchangeRate();
