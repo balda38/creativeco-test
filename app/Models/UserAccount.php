@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property int      $id
- * @property int      $user_id
- * @property int      $currency_id
- * @property float    $value
- * @property string   $created_at
- * @property string   $updated_at
- * @property User     $user
- * @property Currency $currency
+ * @property int                  $id
+ * @property int                  $user_id
+ * @property int                  $currency_id
+ * @property float                $value
+ * @property string               $created_at
+ * @property string               $updated_at
+ * @property User                 $user
+ * @property Currency             $currency
+ * @property UserAccountBuyTask[] $buyTasks
  */
 class UserAccount extends Model implements OwnedModel
 {
@@ -48,6 +49,14 @@ class UserAccount extends Model implements OwnedModel
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function buyTasks()
+    {
+        return $this->hasMany(UserAccountBuyTask::class);
     }
 
     public function scopeForUser(Builder $query, User $user): Builder
