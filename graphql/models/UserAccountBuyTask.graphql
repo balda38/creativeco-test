@@ -1,6 +1,7 @@
 type UserAccountBuyTask {
     id: ID!
     value: Float!
+    count: Float!
     created_at: DateTime!
     buy_before: DateTime
     completed_at: DateTime
@@ -13,6 +14,7 @@ input createUserAccountBuyTaskInput {
     user_account_id: ID!
     currency_id: ID!
     value: Float!
+    count: Float!
     buy_before: DateTime
 }
 

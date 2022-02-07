@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
  * @property int         $user_account_id
  * @property int         $currency_id
  * @property float       $value
+ * @property float       $count
  * @property string      $created_at
  * @property string      $buy_before
  * @property string      $completed_at
@@ -37,7 +38,15 @@ class UserAccountBuyTask extends Model implements OwnedModel
     /**
      * @var array
      */
-    protected $fillable = ['user_account_id', 'currency_id', 'value', 'created_at', 'buy_before', 'completed_at'];
+    protected $fillable = [
+        'user_account_id',
+        'currency_id',
+        'value',
+        'count',
+        'created_at',
+        'buy_before',
+        'completed_at'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
