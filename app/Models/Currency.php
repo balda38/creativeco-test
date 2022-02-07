@@ -37,7 +37,7 @@ class Currency extends Model
      */
     public function exchangeRates()
     {
-        return $this->hasMany(CurrencyExchangeRates::class, 'from_currency_id');
+        return $this->hasMany(CurrencyExchangeRate::class, 'from_currency_id');
     }
 
     /**
@@ -45,7 +45,7 @@ class Currency extends Model
      */
     public function exchangeRatesReverse()
     {
-        return $this->hasMany(CurrencyExchangeRates::class, 'to_currency_id');
+        return $this->hasMany(CurrencyExchangeRate::class, 'to_currency_id');
     }
 
     public function scopeIsArchived(Builder $query, bool $archived): Builder
