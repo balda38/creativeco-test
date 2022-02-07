@@ -92,4 +92,9 @@ class UserAccountTest extends TestCase
         $this->assertTrue($account->is($this->userAccount));
         $this->assertEquals($account->currency_id, $this->currency1->id);
     }
+
+    public function testUserAccountGetOwner()
+    {
+        $this->assertTrue($this->userAccount->getOwner()->is($this->user));
+    }
 }

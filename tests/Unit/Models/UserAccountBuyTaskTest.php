@@ -125,4 +125,10 @@ class UserAccountBuyTaskTest extends TestCase
         $this->assertFalse($this->expiredUserAccountBuyTask->getIsCompleted());
         $this->assertTrue($this->completedUserAccountBuyTask->getIsCompleted());
     }
+
+    public function testUserAccountGetOwner()
+    {
+        $this->assertTrue($this->expiredUserAccountBuyTask->getOwner()->is($this->user));
+        $this->assertTrue($this->completedUserAccountBuyTask->getOwner()->is($this->user));
+    }
 }
