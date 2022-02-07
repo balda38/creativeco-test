@@ -87,7 +87,7 @@ class UserAccountBuyTask extends Model implements OwnedModel
 
     public function getIsExpired(): bool
     {
-        return Carbon::now()->gt(new Carbon($this->buy_before));
+        return $this->buy_before && Carbon::now()->gt(new Carbon($this->buy_before));
     }
 
     public function getIsCompleted(): bool
