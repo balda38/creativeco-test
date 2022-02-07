@@ -76,8 +76,9 @@ class UserAccountBuyTask extends Model implements OwnedModel
 
     public function scopeExpired(Builder $query): Builder
     {
-        return $query->where('buy_before IS NOT NULL')
-            ->andWhere('buy_before', '<=', Carbon::now());
+        return $query->whereNotNull('buy_before')
+            ->where('buy_before', '<=', Carbon::now())
+            ->whereNull('completed_at');
     }
 
     public function getOwner(): User
