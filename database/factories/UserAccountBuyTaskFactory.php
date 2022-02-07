@@ -19,6 +19,7 @@ class UserAccountBuyTaskFactory extends Factory
             'value' => $this->faker->randomFloat(),
             'count' => $this->faker->randomFloat(),
             'buy_before' => $this->faker->dateTime(),
+            'completed_at' => $this->faker->dateTime(),
         ];
     }
 }
