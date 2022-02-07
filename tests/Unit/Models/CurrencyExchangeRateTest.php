@@ -46,24 +46,24 @@ class CurrencyExchangeRateTest extends TestCase
         $this->exchangeRate = null;
     }
 
-    public function testCurrencyExchangeRateFromCurrency()
+    public function testFromCurrency()
     {
         $this->assertTrue($this->exchangeRate->fromCurrency->is($this->currency1));
     }
 
-    public function testCurrencyExchangeRateToCurrency()
+    public function testToCurrency()
     {
         $this->assertTrue($this->exchangeRate->toCurrency->is($this->currency2));
     }
 
-    public function testCurrencyExchangeRateScopeForFromCurrency()
+    public function testScopeForFromCurrency()
     {
         $exchangeRate = CurrencyExchangeRate::forFromCurrency($this->currency1)->first();
         $this->assertTrue($exchangeRate->is($this->exchangeRate));
         $this->assertEquals($exchangeRate->from_currency_id, $this->currency1->id);
     }
 
-    public function testCurrencyExchangeRateScopeForToCurrency()
+    public function testScopeForToCurrency()
     {
         $exchangeRate = CurrencyExchangeRate::forToCurrency($this->currency2)->first();
         $this->assertTrue($exchangeRate->is($this->exchangeRate));

@@ -63,37 +63,37 @@ class UserAccountTest extends TestCase
         $this->userAccountBuyTask = null;
     }
 
-    public function testUserAccountUser()
+    public function testUser()
     {
         $this->assertTrue($this->userAccount->user->is($this->user));
     }
 
-    public function testUserAccountCurrency()
+    public function testCurrency()
     {
         $this->assertTrue($this->userAccount->currency->is($this->currency1));
     }
 
-    public function testUserAccountBuyTasks()
+    public function testBuyTasks()
     {
         $this->assertCount(1, $this->userAccount->buyTasks);
         $this->assertTrue($this->userAccount->buyTasks->first()->is($this->userAccountBuyTask));
     }
 
-    public function testUserAccountScopeForUser()
+    public function testScopeForUser()
     {
         $account = UserAccount::forUser($this->user)->first();
         $this->assertTrue($account->is($this->userAccount));
         $this->assertEquals($account->user_id, $this->user->id);
     }
 
-    public function testUserAccountScopeForCurrency()
+    public function testScopeForCurrency()
     {
         $account = UserAccount::forCurrency($this->currency1)->first();
         $this->assertTrue($account->is($this->userAccount));
         $this->assertEquals($account->currency_id, $this->currency1->id);
     }
 
-    public function testUserAccountGetOwner()
+    public function testGetOwner()
     {
         $this->assertTrue($this->userAccount->getOwner()->is($this->user));
     }

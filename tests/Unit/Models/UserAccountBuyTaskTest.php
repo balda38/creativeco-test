@@ -77,17 +77,17 @@ class UserAccountBuyTaskTest extends TestCase
         $this->completedUserAccountBuyTask = null;
     }
 
-    public function testUserAccountBuyTaskUserAccount()
+    public function testUserAccount()
     {
         $this->assertTrue($this->expiredUserAccountBuyTask->userAccount->is($this->userAccount));
     }
 
-    public function testUserAccountBuyTaskCurrency()
+    public function testCurrency()
     {
         $this->assertTrue($this->expiredUserAccountBuyTask->currency->is($this->currency2));
     }
 
-    public function testUserAccountBuyTaskScopeForUserAccount()
+    public function testScopeForUserAccount()
     {
         $buyTasks = UserAccountBuyTask::forUserAccount($this->userAccount)
             ->orderBy('id')
@@ -97,7 +97,7 @@ class UserAccountBuyTaskTest extends TestCase
         $this->assertEquals($buyTasks->first()->user_account_id, $this->userAccount->id);
     }
 
-    public function testUserAccountBuyTaskScopeForCurrency()
+    public function testScopeForCurrency()
     {
         $buyTasks = UserAccountBuyTask::forCurrency($this->currency2)
             ->orderBy('id')
@@ -107,26 +107,26 @@ class UserAccountBuyTaskTest extends TestCase
         $this->assertEquals($buyTasks->first()->currency_id, $this->currency2->id);
     }
 
-    public function testUserAccountBuyTaskScopeExpired()
+    public function testScopeExpired()
     {
         $buyTasks = UserAccountBuyTask::expired()->get();
         $this->assertCount(1, $buyTasks);
         $this->assertTrue($buyTasks->first()->is($this->expiredUserAccountBuyTask));
     }
 
-    public function testUserAccountBuyTaskGetIsExpired()
+    public function testGetIsExpired()
     {
         $this->assertTrue($this->expiredUserAccountBuyTask->getIsExpired());
         $this->assertFalse($this->completedUserAccountBuyTask->getIsExpired());
     }
 
-    public function testUserAccountBuyTaskGetIsCompleted()
+    public function testGetIsCompleted()
     {
         $this->assertFalse($this->expiredUserAccountBuyTask->getIsCompleted());
         $this->assertTrue($this->completedUserAccountBuyTask->getIsCompleted());
     }
 
-    public function testUserAccountGetOwner()
+    public function testGetOwner()
     {
         $this->assertTrue($this->expiredUserAccountBuyTask->getOwner()->is($this->user));
         $this->assertTrue($this->completedUserAccountBuyTask->getOwner()->is($this->user));

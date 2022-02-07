@@ -54,21 +54,21 @@ class CurrencyTest extends TestCase
         $this->exchangeRate = null;
     }
 
-    public function testCurrencyExchangeRates()
+    public function testExchangeRates()
     {
         $this->assertCount(0, $this->currency2->exchangeRates);
         $this->assertCount(1, $this->currency1->exchangeRates);
         $this->assertTrue($this->currency1->exchangeRates->first()->is($this->exchangeRate));
     }
 
-    public function testCurrencyExchangeRatesReverse()
+    public function testExchangeRatesReverse()
     {
         $this->assertCount(0, $this->currency1->exchangeRatesReverse);
         $this->assertCount(1, $this->currency2->exchangeRatesReverse);
         $this->assertTrue($this->currency2->exchangeRatesReverse->first()->is($this->exchangeRate));
     }
 
-    public function testCurrencyScopeIsArchived()
+    public function testScopeIsArchived()
     {
         $archived = Currency::isArchived(true)->get();
         $notArchived = Currency::isArchived(false)->get();

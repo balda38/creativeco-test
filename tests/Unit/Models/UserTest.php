@@ -47,7 +47,7 @@ class UserTest extends TestCase
         $this->userAccount = null;
     }
 
-    public function testUserUserAccount()
+    public function testUserAccounts()
     {
         $this->assertCount(1, $this->user->accounts);
         $this->assertTrue($this->user->accounts->first()->is($this->userAccount));
