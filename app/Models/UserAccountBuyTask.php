@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 
 /**
+ * Task on buy currency from user account.
+ *
  * @property int         $id
  * @property int         $user_account_id
  * @property int         $currency_id
