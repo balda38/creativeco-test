@@ -21,13 +21,13 @@ class CreateUserAccountBuyTask extends Validator
                     }
                 },
             ],
-            'input.currency_id' => [
+            'input.goal_user_account_id' => [
                 'required',
                 function ($attr, $value, $fail) use ($account) {
-                    $currency = Currency::find($value);
-                    if (!$currency) {
-                        $fail('The currency with id: '.$value.' not found.');
-                    } elseif ($account && (int) $value === $account->currency_id) {
+                    $goalUserAccount = UserAccount::find($value);
+                    if (!$goalUserAccount) {
+                        $fail('The goal user account with id: '.$value.' not found.');
+                    } elseif ($account && $goalUserAccount->currency_id === $account->currency_id) {
                         $fail('The '.$attr.' must be different from account currency.');
                     }
                 },

@@ -52,15 +52,19 @@ class UserAccountBuyTaskTest extends TestCase
             'user_id' => $this->user->id,
             'currency_id' => $this->currency1->id,
         ]);
+        $this->goalUserAccount = UserAccount::factory()->create([
+            'user_id' => $this->user->id,
+            'currency_id' => $this->currency2->id,
+        ]);
         $this->expiredUserAccountBuyTask = UserAccountBuyTask::factory()->create([
             'user_account_id' => $this->userAccount->id,
-            'currency_id' => $this->currency2->id,
+            'goal_user_account_id' => $this->goalUserAccount->id,
             'buy_before' => Carbon::now()->addYears(-1),
             'completed_at' => null,
         ]);
         $this->completedUserAccountBuyTask = UserAccountBuyTask::factory()->create([
             'user_account_id' => $this->userAccount->id,
-            'currency_id' => $this->currency2->id,
+            'goal_user_account_id' => $this->goalUserAccount->id,
             'completed_at' => Carbon::now()->addYears(-1),
         ]);
     }
@@ -73,6 +77,7 @@ class UserAccountBuyTaskTest extends TestCase
         $this->currency1 = null;
         $this->currency2 = null;
         $this->userAccount = null;
+        $this->goalUserAccount = null;
         $this->expiredUserAccountBuyTask = null;
         $this->completedUserAccountBuyTask = null;
     }
@@ -82,9 +87,9 @@ class UserAccountBuyTaskTest extends TestCase
         $this->assertTrue($this->expiredUserAccountBuyTask->userAccount->is($this->userAccount));
     }
 
-    public function testCurrency()
+    public function testGoalUserAccount()
     {
-        $this->assertTrue($this->expiredUserAccountBuyTask->currency->is($this->currency2));
+        $this->assertTrue($this->expiredUserAccountBuyTask->goalUserAccount->is($this->goalUserAccount));
     }
 
     public function testScopeForUserAccount()
@@ -97,14 +102,14 @@ class UserAccountBuyTaskTest extends TestCase
         $this->assertEquals($buyTasks->first()->user_account_id, $this->userAccount->id);
     }
 
-    public function testScopeForCurrency()
+    public function testScopeForGoalUserAccount()
     {
-        $buyTasks = UserAccountBuyTask::forCurrency($this->currency2)
+        $buyTasks = UserAccountBuyTask::forGoalUserAccount($this->goalUserAccount)
             ->orderBy('id')
             ->get();
         $this->assertCount(2, $buyTasks);
         $this->assertTrue($buyTasks->first()->is($this->expiredUserAccountBuyTask));
-        $this->assertEquals($buyTasks->first()->currency_id, $this->currency2->id);
+        $this->assertEquals($buyTasks->first()->goal_user_account_id, $this->goalUserAccount->id);
     }
 
     public function testScopeExpired()

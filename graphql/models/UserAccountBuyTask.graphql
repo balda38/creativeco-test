@@ -7,12 +7,12 @@ type UserAccountBuyTask {
     completed_at: DateTime
     #Relations
     userAccount: UserAccount! @belongsTo
-    currency: Currency! @belongsTo
+    goalUserAccount: UserAccount! @belongsTo
 }
 
 input createUserAccountBuyTaskInput {
     user_account_id: ID!
-    currency_id: ID!
+    goal_user_account_id: ID!
     value: Float!
     count: Float!
     buy_before: DateTime

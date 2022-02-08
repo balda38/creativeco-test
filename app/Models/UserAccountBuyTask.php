@@ -22,7 +22,7 @@ use Illuminate\Support\Carbon;
  * @property string      $buy_before
  * @property string      $completed_at
  * @property UserAccount $userAccount
- * @property Currency    $currency
+ * @property UserAccount $goalUserAccount
  */
 class UserAccountBuyTask extends Model implements OwnedModel
 {
@@ -61,9 +61,9 @@ class UserAccountBuyTask extends Model implements OwnedModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function currency()
+    public function goalUserAccount()
     {
-        return $this->belongsTo(Currency::class);
+        return $this->belongsTo(UserAccount::class);
     }
 
     public function scopeForUserAccount(Builder $query, UserAccount $userAccount): Builder
@@ -71,9 +71,9 @@ class UserAccountBuyTask extends Model implements OwnedModel
         return $query->where('user_account_id', '=', $userAccount->id);
     }
 
-    public function scopeForCurrency(Builder $query, Currency $currency): Builder
+    public function scopeForGoalUserAccount(Builder $query, UserAccount $userAccount): Builder
     {
-        return $query->where('currency_id', '=', $currency->id);
+        return $query->where('goal_user_account_id', '=', $userAccount->id);
     }
 
     public function scopeExpired(Builder $query): Builder
