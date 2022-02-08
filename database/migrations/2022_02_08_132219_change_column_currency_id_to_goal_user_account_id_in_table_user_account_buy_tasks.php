@@ -31,14 +31,6 @@ class ChangeColumnCurrencyIdToGoalUserAccountIdInTableUserAccountBuyTasks extend
      */
     public function down()
     {
-        Schema::table('user_account_buy_tasks', function (Blueprint $table) {
-            $table->dropForeign(['goal_user_account_id']);
-            $table->dropColumn('goal_user_account_id');
-
-            $table->unsignedSmallInteger('currency_id')->after('user_account_id');
-            $table->foreign('currency_id')
-                ->references('id')->on('currencies')
-                ->onUpdate('cascade')->onDelete('cascade');
-        });
+        // Don't support migration down
     }
 }
