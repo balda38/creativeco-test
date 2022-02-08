@@ -4,6 +4,8 @@ namespace App\Common\CoingateParser;
 
 use App\Models\Currency;
 
+use App\Jobs\CancelUserAccountBuyTasksByArchivedCurrencies;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
@@ -56,10 +58,18 @@ class Currencies extends Parser
     /**
      * Mark existing in database, but not existing in Coingate currencies
      * as archived.
+     *
+     * Run dispatch job for cancel buy tasks with archived currencies.
      */
     private static function markArchive(array $data): void
     {
         $currencyCodes = collect($data)->pluck(['symbol']);
-        Currency::whereNotIn('code', $currencyCodes)->update(['archived' => true]);
+        $baseQuery = Currency::whereNotIn('code', $currencyCodes);
+        $archive = $baseQuery->get();
+        $baseQuery->update(['archived' => true]);
+
+        if (!$archive->isEmpty()) {
+            CancelUserAccountBuyTasksByArchivedCurrencies::dispatch($archive);
+        }
     }
 }
