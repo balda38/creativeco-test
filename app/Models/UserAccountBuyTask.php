@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
  *
  * @property int         $id
  * @property int         $user_account_id
- * @property int         $currency_id
+ * @property int         $goal_user_account_id
  * @property float       $value
  * @property float       $count
  * @property string      $created_at
@@ -96,6 +96,16 @@ class UserAccountBuyTask extends Model implements OwnedModel
         return $query->whereNotNull('canceled_at');
     }
 
+    public function scopeWaiting(Builder $query): Builder
+    {
+        return $query->whereNull('completed_at')
+            ->whereNull('canceled_at')
+            ->where(function (Builder $query) {
+                $query->whereNull('buy_before')
+                    ->orWhere('buy_before', '>', Carbon::now());
+            });
+    }
+
     public function getOwner(): User
     {
         return $this->userAccount->user;
@@ -105,7 +115,7 @@ class UserAccountBuyTask extends Model implements OwnedModel
     {
         return !$this->completed_at &&
             !$this->canceled_at &&
-            $this->buy_before && Carbon::now()->gt(new Carbon($this->buy_before));
+            $this->buy_before && Carbon::now()->gte(new Carbon($this->buy_before));
     }
 
     public function getIsCompleted(): bool
@@ -116,5 +126,19 @@ class UserAccountBuyTask extends Model implements OwnedModel
     public function getIsCancled(): bool
     {
         return !is_null($this->canceled_at);
+    }
+
+    public function getIsWaiting(): bool
+    {
+        return !$this->completed_at &&
+            !$this->canceled_at &&
+            !$this->buy_before || (
+                $this->buy_before && Carbon::now()->lt(new Carbon($this->buy_before))
+            );
+    }
+
+    public function getSum(): float
+    {
+        return $this->value * $this->count;
     }
 }

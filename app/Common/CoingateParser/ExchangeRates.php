@@ -5,6 +5,8 @@ namespace App\Common\CoingateParser;
 use App\Models\Currency;
 use App\Models\CurrencyExchangeRate;
 
+use App\Events\CurrencyExchangeRatesSaved;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
@@ -32,12 +34,14 @@ class ExchangeRates extends Parser
             }
 
             foreach ($data as $fromCurrencyCode => $exchangeRates) {
+                $fromCurrency = $currencies->firstWhere('code', $fromCurrencyCode);
+
+                $ratesPart = [];
                 foreach ($exchangeRates as $toCurrencyCode => $rate) {
                     if ($fromCurrencyCode === $toCurrencyCode) {
                         continue;
                     }
 
-                    $fromCurrency = $currencies->firstWhere('code', $fromCurrencyCode);
                     $toCurrency = $currencies->firstWhere('code', $toCurrencyCode);
                     if (!$fromCurrency || !$toCurrency) {
                         continue;
@@ -50,7 +54,9 @@ class ExchangeRates extends Parser
                     }
                     $model->updated_at = $now;
                     $model->save();
+                    $ratesPart[] = $model;
                 }
+                event(new CurrencyExchangeRatesSaved($ratesPart));
             }
         });
     }

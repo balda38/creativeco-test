@@ -82,10 +82,16 @@ class UserAccountTest extends TestCase
         $this->assertTrue($this->userAccount->currency->is($this->currency1));
     }
 
-    public function testBuyTasks()
+    public function testOutgoingBuyTasks()
     {
-        $this->assertCount(1, $this->userAccount->buyTasks);
-        $this->assertTrue($this->userAccount->buyTasks->first()->is($this->userAccountBuyTask));
+        $this->assertCount(1, $this->userAccount->outgoingBuyTasks);
+        $this->assertTrue($this->userAccount->outgoingBuyTasks->first()->is($this->userAccountBuyTask));
+    }
+
+    public function testIncomingBuyTasks()
+    {
+        $this->assertCount(1, $this->goalUserAccount->incomingBuyTasks);
+        $this->assertTrue($this->goalUserAccount->incomingBuyTasks->first()->is($this->userAccountBuyTask));
     }
 
     public function testScopeForUser()

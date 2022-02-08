@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string   $updated_at
  * @property User     $user
  * @property Currency $currency
- * @property \Illuminate\Database\Eloquent\Collection|UserAccountBuyTask[] $buyTasks
+ * @property \Illuminate\Database\Eloquent\Collection|UserAccountBuyTask[] $outgoingBuyTasks
+ * @property \Illuminate\Database\Eloquent\Collection|UserAccountBuyTask[] $incomingBuyTasks
  */
 class UserAccount extends Model implements OwnedModel
 {
@@ -54,9 +55,17 @@ class UserAccount extends Model implements OwnedModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function buyTasks()
+    public function outgoingBuyTasks()
     {
-        return $this->hasMany(UserAccountBuyTask::class);
+        return $this->hasMany(UserAccountBuyTask::class, 'user_account_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incomingBuyTasks()
+    {
+        return $this->hasMany(UserAccountBuyTask::class, 'goal_user_account_id');
     }
 
     public function scopeForUser(Builder $query, User $user): Builder
