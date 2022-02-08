@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 use App\Common\CoingateParser\ExchangeRates;
 
-class ExchangeRatesParse extends Command
+class ParseExchangeRates extends Command
 {
     /**
      * The name and signature of the console command.

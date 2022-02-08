@@ -4,9 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Jobs\CurrenciesParse as CurrenciesParseJob;
+use App\Jobs\ParseCurrencies as ParseCurrenciesJob;
 
-class CurrenciesParse extends Command
+class ParseCurrencies extends Command
 {
     /**
      * The name and signature of the console command.
@@ -29,7 +29,7 @@ class CurrenciesParse extends Command
      */
     public function handle()
     {
-        CurrenciesParseJob::dispatch();
+        ParseCurrenciesJob::dispatch();
 
         return 0;
     }
