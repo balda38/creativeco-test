@@ -31,6 +31,10 @@ class UserAccountTest extends TestCase
      */
     private $userAccount;
     /**
+     * @var UserAccount
+     */
+    private $goalUserAccount;
+    /**
      * @var UserAccountBuyTask
      */
     private $userAccountBuyTask;
@@ -46,9 +50,13 @@ class UserAccountTest extends TestCase
             'user_id' => $this->user->id,
             'currency_id' => $this->currency1->id,
         ]);
+        $this->goalUserAccount = UserAccount::factory()->create([
+            'user_id' => $this->user->id,
+            'currency_id' => $this->currency2->id,
+        ]);
         $this->userAccountBuyTask = UserAccountBuyTask::factory()->create([
             'user_account_id' => $this->userAccount->id,
-            'currency_id' => $this->currency2->id,
+            'goal_user_account_id' => $this->goalUserAccount->id,
         ]);
     }
 
@@ -60,6 +68,7 @@ class UserAccountTest extends TestCase
         $this->currency1 = null;
         $this->currency2 = null;
         $this->userAccount = null;
+        $this->goalUserAccount = null;
         $this->userAccountBuyTask = null;
     }
 

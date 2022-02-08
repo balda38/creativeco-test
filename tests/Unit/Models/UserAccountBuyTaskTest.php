@@ -33,6 +33,10 @@ class UserAccountBuyTaskTest extends TestCase
      */
     private $userAccount;
     /**
+     * @var UserAccount
+     */
+    private $goalUserAccount;
+    /**
      * @var UserAccountBuyTask
      */
     private $expiredUserAccountBuyTask;
