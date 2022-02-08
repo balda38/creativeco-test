@@ -44,6 +44,10 @@ class UserAccountBuyTaskTest extends TestCase
      * @var UserAccountBuyTask
      */
     private $completedUserAccountBuyTask;
+    /**
+     * @var UserAccountBuyTask
+     */
+    private $canceledUserAccountBuyTask;
 
     protected function setUp(): void
     {
@@ -65,11 +69,20 @@ class UserAccountBuyTaskTest extends TestCase
             'goal_user_account_id' => $this->goalUserAccount->id,
             'buy_before' => Carbon::now()->addYears(-1),
             'completed_at' => null,
+            'canceled_at' => null,
         ]);
         $this->completedUserAccountBuyTask = UserAccountBuyTask::factory()->create([
             'user_account_id' => $this->userAccount->id,
             'goal_user_account_id' => $this->goalUserAccount->id,
             'completed_at' => Carbon::now()->addYears(-1),
+            'canceled_at' => null,
+        ]);
+        $this->canceledUserAccountBuyTask = UserAccountBuyTask::factory()->create([
+            'user_account_id' => $this->userAccount->id,
+            'goal_user_account_id' => $this->goalUserAccount->id,
+            'buy_before' => Carbon::now()->addYears(-1),
+            'completed_at' => null,
+            'canceled_at' => Carbon::now(),
         ]);
     }
 
@@ -84,6 +97,7 @@ class UserAccountBuyTaskTest extends TestCase
         $this->goalUserAccount = null;
         $this->expiredUserAccountBuyTask = null;
         $this->completedUserAccountBuyTask = null;
+        $this->canceledUserAccountBuyTask = null;
     }
 
     public function testUserAccount()
@@ -101,7 +115,7 @@ class UserAccountBuyTaskTest extends TestCase
         $buyTasks = UserAccountBuyTask::forUserAccount($this->userAccount)
             ->orderBy('id')
             ->get();
-        $this->assertCount(2, $buyTasks);
+        $this->assertCount(3, $buyTasks);
         $this->assertTrue($buyTasks->first()->is($this->expiredUserAccountBuyTask));
         $this->assertEquals($buyTasks->first()->user_account_id, $this->userAccount->id);
     }
@@ -111,7 +125,7 @@ class UserAccountBuyTaskTest extends TestCase
         $buyTasks = UserAccountBuyTask::forGoalUserAccount($this->goalUserAccount)
             ->orderBy('id')
             ->get();
-        $this->assertCount(2, $buyTasks);
+        $this->assertCount(3, $buyTasks);
         $this->assertTrue($buyTasks->first()->is($this->expiredUserAccountBuyTask));
         $this->assertEquals($buyTasks->first()->goal_user_account_id, $this->goalUserAccount->id);
     }
@@ -123,21 +137,45 @@ class UserAccountBuyTaskTest extends TestCase
         $this->assertTrue($buyTasks->first()->is($this->expiredUserAccountBuyTask));
     }
 
+    public function testScopeCompeted()
+    {
+        $buyTasks = UserAccountBuyTask::completed()->get();
+        $this->assertCount(1, $buyTasks);
+        $this->assertTrue($buyTasks->first()->is($this->completedUserAccountBuyTask));
+    }
+
+    public function testScopeCanceled()
+    {
+        $buyTasks = UserAccountBuyTask::canceled()->get();
+        $this->assertCount(1, $buyTasks);
+        $this->assertTrue($buyTasks->first()->is($this->canceledUserAccountBuyTask));
+    }
+
     public function testGetIsExpired()
     {
         $this->assertTrue($this->expiredUserAccountBuyTask->getIsExpired());
         $this->assertFalse($this->completedUserAccountBuyTask->getIsExpired());
+        $this->assertFalse($this->canceledUserAccountBuyTask->getIsExpired());
     }
 
     public function testGetIsCompleted()
     {
         $this->assertFalse($this->expiredUserAccountBuyTask->getIsCompleted());
         $this->assertTrue($this->completedUserAccountBuyTask->getIsCompleted());
+        $this->assertFalse($this->canceledUserAccountBuyTask->getIsCompleted());
+    }
+
+    public function testGetIsCanceled()
+    {
+        $this->assertFalse($this->expiredUserAccountBuyTask->getIsCancled());
+        $this->assertFalse($this->completedUserAccountBuyTask->getIsCancled());
+        $this->assertTrue($this->canceledUserAccountBuyTask->getIsCancled());
     }
 
     public function testGetOwner()
     {
         $this->assertTrue($this->expiredUserAccountBuyTask->getOwner()->is($this->user));
         $this->assertTrue($this->completedUserAccountBuyTask->getOwner()->is($this->user));
+        $this->assertTrue($this->canceledUserAccountBuyTask->getOwner()->is($this->user));
     }
 }

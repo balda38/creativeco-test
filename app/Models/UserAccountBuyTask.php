@@ -21,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property string      $created_at
  * @property string      $buy_before
  * @property string      $completed_at
+ * @property string      $canceled_at
  * @property UserAccount $userAccount
  * @property UserAccount $goalUserAccount
  */
@@ -47,7 +48,8 @@ class UserAccountBuyTask extends Model implements OwnedModel
         'count',
         'created_at',
         'buy_before',
-        'completed_at'
+        'completed_at',
+        'canceled_at',
     ];
 
     /**
@@ -80,7 +82,18 @@ class UserAccountBuyTask extends Model implements OwnedModel
     {
         return $query->whereNotNull('buy_before')
             ->where('buy_before', '<=', Carbon::now())
-            ->whereNull('completed_at');
+            ->whereNull('completed_at')
+            ->whereNull('canceled_at');
+    }
+
+    public function scopeCompleted(Builder $query): Builder
+    {
+        return $query->whereNotNull('completed_at');
+    }
+
+    public function scopeCanceled(Builder $query): Builder
+    {
+        return $query->whereNotNull('canceled_at');
     }
 
     public function getOwner(): User
@@ -90,11 +103,18 @@ class UserAccountBuyTask extends Model implements OwnedModel
 
     public function getIsExpired(): bool
     {
-        return !$this->completed_at && $this->buy_before && Carbon::now()->gt(new Carbon($this->buy_before));
+        return !$this->completed_at &&
+            !$this->canceled_at &&
+            $this->buy_before && Carbon::now()->gt(new Carbon($this->buy_before));
     }
 
     public function getIsCompleted(): bool
     {
         return !is_null($this->completed_at);
+    }
+
+    public function getIsCancled(): bool
+    {
+        return !is_null($this->canceled_at);
     }
 }

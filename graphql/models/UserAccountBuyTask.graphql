@@ -5,6 +5,7 @@ type UserAccountBuyTask {
     created_at: DateTime!
     buy_before: DateTime
     completed_at: DateTime
+    canceled_at: DateTime
     #Relations
     userAccount: UserAccount! @belongsTo
     goalUserAccount: UserAccount! @belongsTo
