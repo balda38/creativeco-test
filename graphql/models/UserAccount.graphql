@@ -60,6 +60,7 @@ extend type Mutation {
                 idArg: "user_id"
             }
         )
+        @validator(class: "App\\GraphQL\\Validators\\CreateUserAccount")
 
     topUpUserAccount(input: topUpUserAccount @spread): UserAccount
         @guard(with: ["api"])
