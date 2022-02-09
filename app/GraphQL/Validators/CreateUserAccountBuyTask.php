@@ -2,6 +2,8 @@
 
 namespace App\GraphQL\Validators;
 
+use App\Models\UserAccount;
+
 use Nuwave\Lighthouse\Validation\Validator;
 
 class CreateUserAccountBuyTask extends Validator
