@@ -8,6 +8,9 @@ use App\Jobs\CompleteUserAccountBuyTasks;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Listen changes of currency exchange rates.
+ */
 class CurrencyExchangeListener
 {
     public $afterCommit = true;

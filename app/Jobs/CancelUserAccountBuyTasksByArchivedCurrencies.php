@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 use Illuminate\Support\Carbon;
 
+/**
+ * Mark all user account buy tasks for archived currencies as canceled.
+ */
 class CancelUserAccountBuyTasksByArchivedCurrencies implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;

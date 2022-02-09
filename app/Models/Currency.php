@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int    $id
  * @property string $name
  * @property string $code
- * @property bool   $archived
+ * @property bool   $archived   Currency no longer traded
  * @property string $created_at
  * @property string $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|CurrencyExchangeRates[] $exchangeRates

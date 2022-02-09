@@ -7,6 +7,9 @@ use App\Models\Currency;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * This event fired when currency exchange rates was changed.
+ */
 class CurrencyExchangeRatesSaved
 {
     use Dispatchable, SerializesModels;
