@@ -5,9 +5,12 @@ namespace Tests\Feature;
 use App\Models\Currency;
 use App\Common\CoingateParser\Currencies;
 
+use App\Exceptions\CoingateParserException;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Stubs\CoingateClientStub;
+use Tests\Stubs\CoingateClientWithErrorStub;
 
 class CoingateParserCurrenciesTest extends TestCase
 {
@@ -27,21 +30,24 @@ class CoingateParserCurrenciesTest extends TestCase
         $this->currency = Currency::factory()->create([
             'code' => self::EXISTING_CURRENCY_CODE,
         ]);
-
-        app()->bind('coingateClient', function() {
-            return new CoingateClientStub();
-        });
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
 
+        app()->bind('coingateClient', function() {
+            return new \Balda38\CoingateExchangeClient\Client();
+        });
+
         $this->currency = null;
     }
 
     public function testCurrenciesParse()
     {
+        app()->bind('coingateClient', function() {
+            return new CoingateClientStub();
+        });
         Currencies::parse();
 
         $this->assertDatabaseHas('currencies', [
@@ -51,5 +57,14 @@ class CoingateParserCurrenciesTest extends TestCase
             'code' => self::EXISTING_CURRENCY_CODE,
             'archived' => true,
         ]);
+    }
+
+    public function testCurrenciesWithErrorParse()
+    {
+        $this->expectException(CoingateParserException::class);
+        app()->bind('coingateClient', function() {
+            return new CoingateClientWithErrorStub();
+        });
+        Currencies::parse();
     }
 }

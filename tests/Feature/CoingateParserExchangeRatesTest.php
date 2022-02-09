@@ -5,9 +5,12 @@ namespace Tests\Feature;
 use App\Models\Currency;
 use App\Common\CoingateParser\ExchangeRates;
 
+use App\Exceptions\CoingateParserException;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Stubs\CoingateClientStub;
+use Tests\Stubs\CoingateClientWithErrorStub;
 
 class CoingateParserExchangeRatesTest extends TestCase
 {
@@ -40,15 +43,15 @@ class CoingateParserExchangeRatesTest extends TestCase
             'code' => 'RUB',
             'archived' => true,
         ]);
-
-        app()->bind('coingateClient', function() {
-            return new CoingateClientStub();
-        });
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
+
+        app()->bind('coingateClient', function() {
+            return new \Balda38\CoingateExchangeClient\Client();
+        });
 
         $this->currency1 = null;
         $this->currency2 = null;
@@ -57,7 +60,11 @@ class CoingateParserExchangeRatesTest extends TestCase
 
     public function testExchangeRatesParse()
     {
+        app()->bind('coingateClient', function() {
+            return new CoingateClientStub();
+        });
         ExchangeRates::parse();
+
         $this->assertDatabaseHas('currency_exchange_rates', [
             'from_currency_id' => $this->currency1->id,
             'to_currency_id' => $this->currency2->id,
@@ -69,5 +76,14 @@ class CoingateParserExchangeRatesTest extends TestCase
         $this->assertDatabaseMissing('currency_exchange_rates', [
             'from_currency_id' => $this->currency3->id,
         ]);
+    }
+
+    public function testExchangeRatesWithErrorParse()
+    {
+        $this->expectException(CoingateParserException::class);
+        app()->bind('coingateClient', function() {
+            return new CoingateClientWithErrorStub();
+        });
+        ExchangeRates::parse();
     }
 }

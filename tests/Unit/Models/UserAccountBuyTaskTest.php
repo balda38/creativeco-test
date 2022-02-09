@@ -94,6 +94,8 @@ class UserAccountBuyTaskTest extends TestCase
             'buy_before' => null,
             'completed_at' => null,
             'canceled_at' => null,
+            'value' => 10,
+            'count' => 10,
         ]);
     }
 
@@ -207,5 +209,10 @@ class UserAccountBuyTaskTest extends TestCase
         $this->assertTrue($this->expiredUserAccountBuyTask->getOwner()->is($this->user));
         $this->assertTrue($this->completedUserAccountBuyTask->getOwner()->is($this->user));
         $this->assertTrue($this->canceledUserAccountBuyTask->getOwner()->is($this->user));
+    }
+
+    public function testGetSum()
+    {
+        $this->assertEquals($this->waitingUserAccountBuyTask->getSum(), 100);
     }
 }
