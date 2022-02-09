@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+
+use Joselfonseca\LighthouseGraphQLPassport\HasLoggedInTokens;
+use Joselfonseca\LighthouseGraphQLPassport\MustVerifyEmailGraphQL;
+use Laravel\Passport\HasApiTokens;
 
 /**
  * @property int    $id
@@ -21,7 +24,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasLoggedInTokens, MustVerifyEmailGraphQL;
 
     /**
      * The attributes that are mass assignable.

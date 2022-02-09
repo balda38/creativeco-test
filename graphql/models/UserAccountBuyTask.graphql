@@ -32,7 +32,7 @@ extend type Query {
             }
         )
 
-    userAccountBuyTasks(
+    userAccountOutgoingBuyTasks(
         user_account_id: ID! @where(operator: "=")
     ): [UserAccountBuyTask!]!
         @guard(with: ["api"])
@@ -43,6 +43,20 @@ extend type Query {
             args: {
                 queryByModel: "UserAccount"
                 idArg: "user_account_id"
+            }
+        )
+
+    userAccountIncomingBuyTasks(
+        goal_user_account_id: ID! @where(operator: "=")
+    ): [UserAccountBuyTask!]!
+        @guard(with: ["api"])
+        @paginate(defaultCount: 10)
+        @can(
+            ability: "graphql"
+            injectArgs: "true"
+            args: {
+                queryByModel: "UserAccount"
+                idArg: "goal_user_account_id"
             }
         )
 }
