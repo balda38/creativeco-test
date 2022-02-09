@@ -1,2 +1,12 @@
 #import scalars.graphql
 #import models/*.graphql
+
+#Testing stubs
+extend type Query {
+    testUserAccount(id: ID! @eq): UserAccount
+        @find
+        @guard(with: ["api"])
+        @can(
+            ability: "graphql"
+        )
+}

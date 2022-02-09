@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\CoingateParser;
 
 use App\Models\Currency;
 use App\Common\CoingateParser\ExchangeRates;
@@ -43,6 +43,10 @@ class CoingateParserExchangeRatesTest extends TestCase
             'code' => 'RUB',
             'archived' => true,
         ]);
+
+        app()->bind('coingateClient', function() {
+            return new CoingateClientStub();
+        });
     }
 
     protected function tearDown(): void
@@ -60,9 +64,6 @@ class CoingateParserExchangeRatesTest extends TestCase
 
     public function testExchangeRatesParse()
     {
-        app()->bind('coingateClient', function() {
-            return new CoingateClientStub();
-        });
         ExchangeRates::parse();
 
         $this->assertDatabaseHas('currency_exchange_rates', [
@@ -76,6 +77,18 @@ class CoingateParserExchangeRatesTest extends TestCase
         $this->assertDatabaseMissing('currency_exchange_rates', [
             'from_currency_id' => $this->currency3->id,
         ]);
+        $this->assertDatabaseCount('currency_exchange_rates', 2);
+    }
+
+    public function testExchangeRatesOnArchivedCurrenciesParse()
+    {
+        $this->currency1->archived = true;
+        $this->currency1->save();
+        $this->currency2->archived = true;
+        $this->currency2->save();
+
+        ExchangeRates::parse();
+        $this->assertDatabaseCount('currency_exchange_rates', 0);
     }
 
     public function testExchangeRatesWithErrorParse()

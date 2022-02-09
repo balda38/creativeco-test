@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\CoingateParser;
 
 use App\Models\Currency;
 use App\Common\CoingateParser\Currencies;

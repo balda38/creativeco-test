@@ -25,6 +25,7 @@ class CoingateClientStub
             'EUR' => [
                 'USD' => 1.2,
                 'RUB' => 80.3,
+                'EUR' => 1,
             ],
             'RUB' => [
                 'USD' => 0.014,
