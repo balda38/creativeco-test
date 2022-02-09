@@ -5,9 +5,6 @@ namespace App\Jobs;
 use App\Models\UserAccount;
 use App\Models\UserAccountBuyTask;
 
-use App\Common\Utils\CurrencyExchangeRatesConverter;
-use App\Exceptions\CurrencyExchangeRatesConverterException;
-
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
