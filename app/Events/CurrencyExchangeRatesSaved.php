@@ -39,8 +39,8 @@ class CurrencyExchangeRatesSaved
         return $this->exchangeRates;
     }
 
-    public function getFromCurrency(): Currency
+    public function getToCurrency(): Currency
     {
-        return current($this->exchangeRates)->fromCurrency;
+        return reset($this->exchangeRates)->fromCurrency;
     }
 }

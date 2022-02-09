@@ -6,6 +6,7 @@ use App\Models\UserAccount;
 use App\Models\UserAccountBuyTask;
 
 use App\Common\Utils\CurrencyExchangeRatesConverter;
+use App\Exceptions\CurrencyExchangeRatesConverterException;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -53,21 +54,19 @@ class CompleteUserAccountBuyTasks implements ShouldQueue
             return $task->getIsWaiting();
         })->sortBy('created_at');
         foreach ($tasks as $task) {
-            $toCurrency = $task->userAccount->currency;
-            $exchangeRate = $this->exchangeRates->where('to_currency_id', '=', $toCurrency->id)
+            $fromCurrency = $task->userAccount->currency;
+            $exchangeRate = $this->exchangeRates->where('to_currency_id', '=', $fromCurrency->id)
                 ->first();
+            if (!$exchangeRate) {
+                continue;
+            }
 
             $exchangeRateSum = $exchangeRate->value * $task->count;
-            $exchangeRateSumReverse = CurrencyExchangeRatesConverter::reverseValue(
-                $exchangeRate->value,
-                $task->goalUserAccount->currency,
-                $task->userAccount->currency
-            ) * $task->count;
-            if ($exchangeRateSumReverse <= $task->getSum() && $exchangeRateSum <= $task->userAccount->value) {
-                DB::transaction(function () use ($task, $exchangeRateSum, $exchangeRateSumReverse) {
+            if ($exchangeRateSum <= $task->getSum() && $exchangeRateSum <= $task->userAccount->value) {
+                DB::transaction(function () use ($task, $exchangeRateSum) {
                     $task->userAccount->value -= $exchangeRateSum;
                     $task->userAccount->save();
-                    $task->goalUserAccount->value += $exchangeRateSumReverse;
+                    $task->goalUserAccount->value += $task->count;
                     $task->goalUserAccount->save();
                     $task->completed_at = Carbon::now();
                     $task->save();
