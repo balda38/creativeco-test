@@ -6,7 +6,8 @@ type UserAccount {
     #Relations
     user: User! @belongsTo
     currency: Currency! @belongsTo
-    buyTasks: [UserAccountBuyTask!]! @hasMany
+    outgoingBuyTasks: [UserAccountBuyTask!]! @hasMany
+    incomingBuyTasks: [UserAccountBuyTask!]! @hasMany
 }
 
 input createUserAccountInput {

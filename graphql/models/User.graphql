@@ -12,6 +12,8 @@ type User {
     created_at: DateTime!
     "When the account was last updated."
     updated_at: DateTime!
+    #Relations
+    userAccounts: [UserAccount!]! @hasMany
 }
 
 extend type Query {
