@@ -63,7 +63,6 @@ extend type Mutation {
         @validator(class: "App\\GraphQL\\Validators\\CreateUserAccount")
 
     topUpUserAccount(input: topUpUserAccount @spread): UserAccount
-        @update
         @guard(with: ["api"])
         @can(
             ability: "graphql"
