@@ -18,14 +18,17 @@ class CoingateParserExchangeRatesTest extends TestCase
 
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency1;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency2;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency3;
 

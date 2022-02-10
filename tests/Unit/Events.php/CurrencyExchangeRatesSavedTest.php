@@ -16,22 +16,27 @@ class ExchangeRate extends TestCase
 
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency1;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency2;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency3;
     /**
      * @var CurrencyExchangeRate
+     * @psalm-ignore-var
      */
     private $exchangeRate1;
     /**
      * @var CurrencyExchangeRate
+     * @psalm-ignore-var
      */
     private $exchangeRate2;
     /**

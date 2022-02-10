@@ -14,7 +14,8 @@ class DeleteUserAccountBuyTask extends Validator
             'id' => [
                 'required',
                 function ($attr, $value, $fail) {
-                    if ($value && !($task = UserAccountBuyTask::find($value))) {
+                    $task = UserAccountBuyTask::find($value);
+                    if (!$task) {
                         $fail('The selected '.$attr.' is invalid.');
                     } elseif ($task->getIsCompleted()) {
                         $fail('Unable to delete completed task.');

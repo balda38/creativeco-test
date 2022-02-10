@@ -16,26 +16,32 @@ class UserAccountTest extends TestCase
 
     /**
      * @var User
+     * @psalm-ignore-var
      */
     private $user;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency1;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency2;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $goalUserAccount;
     /**
      * @var UserAccountBuyTask
+     * @psalm-ignore-var
      */
     private $userAccountBuyTask;
 

@@ -10,22 +10,27 @@ class UserAccountTest extends TestCase
 {
     /**
      * @var User
+     * @psalm-ignore-var
      */
     private $otherUser;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $archivedCurrency;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount1;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount2;
 

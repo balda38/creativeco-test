@@ -20,6 +20,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * @var User
+     * @psalm-ignore-var
      */
     protected $user;
 

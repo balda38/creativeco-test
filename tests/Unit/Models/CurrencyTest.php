@@ -14,18 +14,22 @@ class CurrencyTest extends TestCase
 
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency1;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency2;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $archivedCurrency;
     /**
      * @var CurrencyExchangeRate
+     * @psalm-ignore-var
      */
     private $exchangeRate;
 

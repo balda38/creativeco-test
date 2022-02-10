@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Currency;
+use App\Models\CurrencyExchangeRate;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -15,7 +16,7 @@ class CurrencyExchangeRatesSaved
     use Dispatchable, SerializesModels;
 
     /**
-     * @var App\Models\CurrencyExchangeRate[]
+     * @var CurrencyExchangeRate[]
      */
     protected $exchangeRates;
 
@@ -35,7 +36,7 @@ class CurrencyExchangeRatesSaved
     }
 
     /**
-     * @return App\Models\CurrencyExchangeRate[]
+     * @return CurrencyExchangeRate[]
      */
     public function getExchangeRates(): array
     {

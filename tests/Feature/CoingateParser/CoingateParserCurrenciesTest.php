@@ -20,6 +20,7 @@ class CoingateParserCurrenciesTest extends TestCase
 
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency;
 

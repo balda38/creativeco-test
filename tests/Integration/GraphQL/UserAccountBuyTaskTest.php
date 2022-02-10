@@ -14,46 +14,57 @@ class UserAccountBuyTaskTest extends TestCase
 {
     /**
      * @var User
+     * @psalm-ignore-var
      */
     private $otherUser;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency1;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency2;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $archivedCurrency;
     /**
      * @var CurrencyExchangeRate
+     * @psalm-ignore-var
      */
     private $currencyExchangeRate;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount1;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount2;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount3;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccountWithArchivedCurrency;
     /**
      * @var UserAccountBuyTask
+     * @psalm-ignore-var
      */
     private $userAccountBuyTask1;
     /**
      * @var UserAccountBuyTask
+     * @psalm-ignore-var
      */
     private $userAccountBuyTask2;
 

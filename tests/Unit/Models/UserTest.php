@@ -15,14 +15,17 @@ class UserTest extends TestCase
 
     /**
      * @var User
+     * @psalm-ignore-var
      */
     private $user;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount;
 

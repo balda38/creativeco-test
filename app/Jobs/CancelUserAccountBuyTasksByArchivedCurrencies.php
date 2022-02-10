@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Currency;
 use App\Models\UserAccountBuyTask;
 
 use Illuminate\Bus\Queueable;
@@ -30,7 +31,7 @@ class CancelUserAccountBuyTasksByArchivedCurrencies implements ShouldQueue
     public $tries = 5;
 
     /**
-     * @var App\Models\Currency[]|Collection
+     * @var Currency[]|Collection
      */
     private $archivedCurrencies;
 

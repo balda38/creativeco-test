@@ -20,34 +20,42 @@ class CurrencyExchangeListenerTest extends TestCase
 
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency1;
     /**
      * @var Currency
+     * @psalm-ignore-var
      */
     private $currency2;
     /**
      * @var CurrencyExchangeRate
+     * @psalm-ignore-var
      */
     private $exchangeRate;
     /**
      * @var User
+     * @psalm-ignore-var
      */
     private $user;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $userAccount;
     /**
      * @var UserAccount
+     * @psalm-ignore-var
      */
     private $goalUserAccount;
     /**
      * @var UserAccountBuyTask
+     * @psalm-ignore-var
      */
     private $userAccountBuyTask1;
     /**
      * @var UserAccountBuyTask
+     * @psalm-ignore-var
      */
     private $userAccountBuyTask2;
 
