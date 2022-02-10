@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Support\Carbon;
+
 /**
  * @property int                                                              $id
  * @property string                                                           $name
  * @property string                                                           $code
  * @property bool                                                             $archived             Currency no longer traded
- * @property string                                                           $created_at
- * @property string                                                           $updated_at
+ * @property Carbon                                                           $created_at
+ * @property Carbon                                                           $updated_at
  * @property CurrencyExchangeRates[]|\Illuminate\Database\Eloquent\Collection $exchangeRates
  * @property CurrencyExchangeRates[]|\Illuminate\Database\Eloquent\Collection $exchangeRatesReverse
  */

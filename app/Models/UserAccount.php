@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Support\Carbon;
+
 /**
  * @property int                                                           $id
  * @property int                                                           $user_id
  * @property int                                                           $currency_id
  * @property float                                                         $value            Count of currency
- * @property string                                                        $created_at
- * @property string                                                        $updated_at
+ * @property Carbon                                                        $created_at
+ * @property Carbon                                                        $updated_at
  * @property User                                                          $user
  * @property Currency                                                      $currency
  * @property \Illuminate\Database\Eloquent\Collection|UserAccountBuyTask[] $outgoingBuyTasks Buy tasks from this account

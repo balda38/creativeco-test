@@ -10,6 +10,8 @@ use Joselfonseca\LighthouseGraphQLPassport\HasLoggedInTokens;
 use Joselfonseca\LighthouseGraphQLPassport\MustVerifyEmailGraphQL;
 use Laravel\Passport\HasApiTokens;
 
+use Illuminate\Support\Carbon;
+
 /**
  * @property int                                                    $id
  * @property string                                                 $name
@@ -17,8 +19,8 @@ use Laravel\Passport\HasApiTokens;
  * @property string                                                 $email_verified_at
  * @property string                                                 $password
  * @property string                                                 $remember_token
- * @property string                                                 $created_at
- * @property string                                                 $updated_at
+ * @property Carbon                                                 $created_at
+ * @property Carbon                                                 $updated_at
  * @property string                                                 $avatar
  * @property \Illuminate\Database\Eloquent\Collection|UserAccount[] $accounts
  */

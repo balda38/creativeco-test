@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Support\Carbon;
+
 /**
  * Exchange rate from one currency to other currency.
  *
@@ -13,8 +15,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int      $from_currency_id
  * @property int      $to_currency_id
  * @property float    $value
- * @property string   $created_at
- * @property string   $updated_at
+ * @property Carbon   $created_at
+ * @property Carbon   $updated_at
  * @property Currency $fromCurrency
  * @property Currency $toCurrency
  */

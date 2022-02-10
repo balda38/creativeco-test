@@ -18,10 +18,10 @@ use Illuminate\Support\Carbon;
  * @property int         $goal_user_account_id Account to which currency will be received
  * @property float       $value                Max value of curerncies exchange rate
  * @property float       $count                Count of purchased currency
- * @property string      $created_at
- * @property string      $buy_before           After this time purchase will not to be attempt to carried out
- * @property string      $completed_at
- * @property string      $canceled_at          Time when is one of accounts currency became archived
+ * @property Carbon      $created_at
+ * @property Carbon      $buy_before           After this time purchase will not to be attempt to carried out
+ * @property Carbon      $completed_at
+ * @property Carbon      $canceled_at          Time when is one of accounts currency became archived
  * @property UserAccount $userAccount
  * @property UserAccount $goalUserAccount
  */
