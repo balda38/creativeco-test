@@ -53,6 +53,11 @@ class UserAccountBuyTask extends Model implements OwnedModel
     ];
 
     /**
+     * @var array
+     */
+    protected $dates = ['created_at', 'buy_before', 'completed_at', 'canceled_at'];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function userAccount()
@@ -115,7 +120,7 @@ class UserAccountBuyTask extends Model implements OwnedModel
     {
         return !$this->completed_at &&
             !$this->canceled_at &&
-            $this->buy_before && Carbon::now()->gte(new Carbon($this->buy_before));
+            $this->buy_before && Carbon::now()->gte($this->buy_before);
     }
 
     public function getIsCompleted(): bool
@@ -133,7 +138,7 @@ class UserAccountBuyTask extends Model implements OwnedModel
         return !$this->completed_at &&
             !$this->canceled_at &&
             !$this->buy_before || (
-                $this->buy_before && Carbon::now()->lt(new Carbon($this->buy_before))
+                $this->buy_before && Carbon::now()->lt($this->buy_before)
             );
     }
 
