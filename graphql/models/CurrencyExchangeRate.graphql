@@ -1,0 +1,9 @@
+type CurrencyExchangeRate {
+    id: ID!
+    value: Float!
+    created_at: DateTime!
+    updated_at: DateTime!
+    #Relations
+    fromCurrency: Currency! @belongsTo
+    toCurrency: Currency! @belongsTo
+}

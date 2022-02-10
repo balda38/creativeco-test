@@ -5,6 +5,9 @@ type Currency {
     archived: Boolean!
     created_at: DateTime!
     updated_at: DateTime!
+    #Relations
+    exchangeRates: [CurrencyExchangeRate!]! @hasMany
+    exchangeRatesReverse: [CurrencyExchangeRate!]! @hasMany
 }
 
 extend type Query {
