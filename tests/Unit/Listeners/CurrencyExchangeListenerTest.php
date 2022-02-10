@@ -11,12 +11,12 @@ use App\Models\UserAccountBuyTask;
 use App\Events\CurrencyExchangeRatesSaved;
 use App\Listeners\CurrencyExchangeListener;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CurrencyExchangeListenerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * @var Currency

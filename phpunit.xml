@@ -21,6 +21,8 @@
         </include>
         <exclude>
             <directory suffix=".php">./app/Http</directory>
+            <file>./app/Providers/BroadcastServiceProvider.php</file>
+            <file>./app/Providers/RouteServiceProvider.php</file>
         </exclude>
     </coverage>
     <php>

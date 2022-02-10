@@ -7,14 +7,14 @@ use App\Models\Currency;
 use App\Models\UserAccount;
 use App\Models\UserAccountBuyTask;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 use Illuminate\Support\Carbon;
 
 class UserAccountBuyTaskTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * @var User

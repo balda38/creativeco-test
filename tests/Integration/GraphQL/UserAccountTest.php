@@ -64,7 +64,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             {
                 userAccount(id: {$this->userAccount1->id}) {
                     id
@@ -73,12 +73,13 @@ class UserAccountTest extends TestCase
                     }
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'userAccount' => [
-                    'id' => $this->userAccount1->id,
+                    'id' => (string) $this->userAccount1->id,
                     'currency' => [
-                        'id' => $this->currency->id
+                        'id' => (string) $this->currency->id
                     ],
                 ],
             ],
@@ -121,7 +122,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             {
                 userAccounts(user_id: {$this->user->id}) {
                     data {
@@ -132,20 +133,21 @@ class UserAccountTest extends TestCase
                     }
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'userAccounts' => [
                     'data' => [
                         [
-                            'id' => $this->userAccount1->id,
+                            'id' => (string) $this->userAccount1->id,
                             'currency' => [
-                                'id' => $this->currency->id
+                                'id' => (string) $this->currency->id
                             ],
                         ],
                         [
-                            'id' => $this->userAccount2->id,
+                            'id' => (string) $this->userAccount2->id,
                             'currency' => [
-                                'id' => $this->currency->id
+                                'id' => (string) $this->currency->id
                             ],
                         ],
                     ],
@@ -210,7 +212,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             mutation {
                 createUserAccount(input: {
                     user_id: {$this->user->id}
@@ -224,14 +226,15 @@ class UserAccountTest extends TestCase
                     }
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'createUserAccount' => [
                     'user' => [
-                        'id' => $this->user->id,
+                        'id' => (string) $this->user->id,
                     ],
                     'currency' => [
-                        'id' => $this->currency->id
+                        'id' => (string) $this->currency->id
                     ],
                 ],
             ],
@@ -321,7 +324,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             mutation {
                 topUpUserAccount(input: {
                     id: {$this->userAccount1->id}
@@ -331,10 +334,11 @@ class UserAccountTest extends TestCase
                     value
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'topUpUserAccount' => [
-                    'id' => $this->userAccount1->id,
+                    'id' => (string) $this->userAccount1->id,
                     'value' => 10,
                 ],
             ],

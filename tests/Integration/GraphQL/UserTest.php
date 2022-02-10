@@ -8,17 +8,18 @@ class UserTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             {
                 me {
                     id
                     name
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'me' => [
-                    'id' => $this->user->id,
+                    'id' => (string) $this->user->id,
                     'name' => $this->user->name,
                 ],
             ],

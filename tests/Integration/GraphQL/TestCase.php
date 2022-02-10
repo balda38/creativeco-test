@@ -6,14 +6,14 @@ use App\Models\User;
 
 use Nuwave\Lighthouse\Testing\ClearsSchemaCache;
 use Nuwave\Lighthouse\Testing\MakesGraphQLRequests;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Tests\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
 
 abstract class TestCase extends BaseTestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
     use CreatesApplication;
     use ClearsSchemaCache;
     use MakesGraphQLRequests;

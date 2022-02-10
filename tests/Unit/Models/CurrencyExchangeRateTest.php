@@ -5,12 +5,12 @@ namespace Tests\Unit\Models;
 use App\Models\Currency;
 use App\Models\CurrencyExchangeRate;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CurrencyExchangeRateTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * @var Currency

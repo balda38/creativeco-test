@@ -123,7 +123,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             {
                 userAccountBuyTask(id: {$this->userAccountBuyTask1->id}) {
                     id
@@ -141,20 +141,21 @@ class UserAccountBuyTaskTest extends TestCase
                     }
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'userAccountBuyTask' => [
-                    'id' => $this->userAccountBuyTask1->id,
+                    'id' => (string) $this->userAccountBuyTask1->id,
                     'userAccount' => [
-                        'id' => $this->userAccount1->id,
+                        'id' => (string) $this->userAccount1->id,
                         'currency' => [
-                            'id' => $this->currency1->id
+                            'id' => (string) $this->currency1->id
                         ],
                     ],
                     'goalUserAccount' => [
-                        'id' => $this->userAccount2->id,
+                        'id' => (string) $this->userAccount2->id,
                         'currency' => [
-                            'id' => $this->currency2->id
+                            'id' => (string) $this->currency2->id
                         ],
                     ],
                 ],
@@ -191,7 +192,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             {
                 userAccountOutgoingBuyTasks(user_account_id: {$this->userAccount1->id}) {
                     data {
@@ -211,37 +212,38 @@ class UserAccountBuyTaskTest extends TestCase
                     }
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'userAccountOutgoingBuyTasks' => [
                     'data' => [
                         [
-                            'id' => $this->userAccountBuyTask1->id,
+                            'id' => (string) $this->userAccountBuyTask1->id,
                             'userAccount' => [
-                                'id' => $this->userAccount1->id,
+                                'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => $this->currency1->id
+                                    'id' => (string) $this->currency1->id
                                 ],
                             ],
                             'goalUserAccount' => [
-                                'id' => $this->userAccount2->id,
+                                'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => $this->currency2->id
+                                    'id' => (string) $this->currency2->id
                                 ],
                             ],
                         ],
                         [
-                            'id' => $this->userAccountBuyTask2->id,
+                            'id' => (string) $this->userAccountBuyTask2->id,
                             'userAccount' => [
-                                'id' => $this->userAccount1->id,
+                                'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => $this->currency1->id
+                                    'id' => (string) $this->currency1->id
                                 ],
                             ],
                             'goalUserAccount' => [
-                                'id' => $this->userAccount2->id,
+                                'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => $this->currency2->id
+                                    'id' => (string) $this->currency2->id
                                 ],
                             ],
                         ],
@@ -282,7 +284,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             {
                 userAccountIncomingBuyTasks(goal_user_account_id: {$this->userAccount2->id}) {
                     data {
@@ -302,37 +304,38 @@ class UserAccountBuyTaskTest extends TestCase
                     }
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'userAccountIncomingBuyTasks' => [
                     'data' => [
                         [
-                            'id' => $this->userAccountBuyTask1->id,
+                            'id' => (string) $this->userAccountBuyTask1->id,
                             'userAccount' => [
-                                'id' => $this->userAccount1->id,
+                                'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => $this->currency1->id
+                                    'id' => (string) $this->currency1->id
                                 ],
                             ],
                             'goalUserAccount' => [
-                                'id' => $this->userAccount2->id,
+                                'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => $this->currency2->id
+                                    'id' => (string) $this->currency2->id
                                 ],
                             ],
                         ],
                         [
-                            'id' => $this->userAccountBuyTask2->id,
+                            'id' => (string) $this->userAccountBuyTask2->id,
                             'userAccount' => [
-                                'id' => $this->userAccount1->id,
+                                'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => $this->currency1->id
+                                    'id' => (string) $this->currency1->id
                                 ],
                             ],
                             'goalUserAccount' => [
-                                'id' => $this->userAccount2->id,
+                                'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => $this->currency2->id
+                                    'id' => (string) $this->currency2->id
                                 ],
                             ],
                         ],
@@ -440,7 +443,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: {$this->userAccount1->id}
@@ -462,19 +465,20 @@ class UserAccountBuyTaskTest extends TestCase
                     }
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'createUserAccountBuyTask' => [
                     'userAccount' => [
-                        'id' => $this->userAccount1->id,
+                        'id' => (string) $this->userAccount1->id,
                         'currency' => [
-                            'id' => $this->currency1->id,
+                            'id' => (string) $this->currency1->id,
                         ],
                     ],
                     'goalUserAccount' => [
-                        'id' => $this->userAccount2->id,
+                        'id' => (string) $this->userAccount2->id,
                         'currency' => [
-                            'id' => $this->currency2->id,
+                            'id' => (string) $this->currency2->id,
                         ],
                     ],
                 ],
@@ -699,16 +703,17 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/** @lang GraphQL */ "
             mutation {
                 deleteUserAccountBuyTask(id: {$this->userAccountBuyTask1->id}) {
                     id
                 }
             }
-        ")->assertJson([
+        ");
+        $this->assertSame($response->json(), [
             'data' => [
                 'deleteUserAccountBuyTask' => [
-                    'id' => $this->userAccountBuyTask1->id,
+                    'id' => (string) $this->userAccountBuyTask1->id,
                 ],
             ],
         ]);

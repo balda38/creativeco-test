@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Console\Commands;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ParseExchangeRatesTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function testCommandResult()
     {

@@ -12,6 +12,9 @@ class TradedCurrencies
      */
     public function __invoke($_, array $args)
     {
-        return Currency::isArchived(false)->orderBy('id')->get();
+        return Currency::isArchived(false)
+            ->has('exchangeRates')
+            ->orderBy('id')
+            ->get();
     }
 }

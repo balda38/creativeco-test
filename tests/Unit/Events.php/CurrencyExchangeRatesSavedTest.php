@@ -7,12 +7,12 @@ use App\Models\CurrencyExchangeRate;
 
 use App\Events\CurrencyExchangeRatesSaved;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExchangeRate extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * @var Currency

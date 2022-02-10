@@ -7,14 +7,14 @@ use App\Common\CoingateParser\ExchangeRates;
 
 use App\Exceptions\CoingateParserException;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Stubs\CoingateClientStub;
 use Tests\Stubs\CoingateClientWithErrorStub;
 
 class CoingateParserExchangeRatesTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * @var Currency
