@@ -65,7 +65,8 @@ class ExchangeRates extends Parser
     {
         $exchangeRateModel = CurrencyExchangeRate::forFromCurrency($fromCurrency)
             ->forToCurrency($toCurrency)
-            ->first();
+            ->first()
+        ;
         if (!$exchangeRateModel) {
             $exchangeRateModel = new CurrencyExchangeRate();
             $exchangeRateModel->from_currency_id = $fromCurrency->id;

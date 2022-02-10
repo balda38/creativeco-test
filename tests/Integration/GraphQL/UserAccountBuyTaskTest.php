@@ -123,7 +123,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccountBuyTask(id: {$this->userAccountBuyTask1->id}) {
                     id
@@ -149,13 +149,13 @@ class UserAccountBuyTaskTest extends TestCase
                     'userAccount' => [
                         'id' => (string) $this->userAccount1->id,
                         'currency' => [
-                            'id' => (string) $this->currency1->id
+                            'id' => (string) $this->currency1->id,
                         ],
                     ],
                     'goalUserAccount' => [
                         'id' => (string) $this->userAccount2->id,
                         'currency' => [
-                            'id' => (string) $this->currency2->id
+                            'id' => (string) $this->currency2->id,
                         ],
                     ],
                 ],
@@ -167,7 +167,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccountBuyTask(id: {$this->userAccountBuyTask1->id}) {
                     id
@@ -192,7 +192,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccountOutgoingBuyTasks(user_account_id: {$this->userAccount1->id}) {
                     data {
@@ -222,13 +222,13 @@ class UserAccountBuyTaskTest extends TestCase
                             'userAccount' => [
                                 'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency1->id
+                                    'id' => (string) $this->currency1->id,
                                 ],
                             ],
                             'goalUserAccount' => [
                                 'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency2->id
+                                    'id' => (string) $this->currency2->id,
                                 ],
                             ],
                         ],
@@ -237,13 +237,13 @@ class UserAccountBuyTaskTest extends TestCase
                             'userAccount' => [
                                 'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency1->id
+                                    'id' => (string) $this->currency1->id,
                                 ],
                             ],
                             'goalUserAccount' => [
                                 'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency2->id
+                                    'id' => (string) $this->currency2->id,
                                 ],
                             ],
                         ],
@@ -257,7 +257,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccountOutgoingBuyTasks(user_account_id: {$this->userAccount1->id}) {
                     data {
@@ -284,7 +284,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccountIncomingBuyTasks(goal_user_account_id: {$this->userAccount2->id}) {
                     data {
@@ -314,13 +314,13 @@ class UserAccountBuyTaskTest extends TestCase
                             'userAccount' => [
                                 'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency1->id
+                                    'id' => (string) $this->currency1->id,
                                 ],
                             ],
                             'goalUserAccount' => [
                                 'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency2->id
+                                    'id' => (string) $this->currency2->id,
                                 ],
                             ],
                         ],
@@ -329,13 +329,13 @@ class UserAccountBuyTaskTest extends TestCase
                             'userAccount' => [
                                 'id' => (string) $this->userAccount1->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency1->id
+                                    'id' => (string) $this->currency1->id,
                                 ],
                             ],
                             'goalUserAccount' => [
                                 'id' => (string) $this->userAccount2->id,
                                 'currency' => [
-                                    'id' => (string) $this->currency2->id
+                                    'id' => (string) $this->currency2->id,
                                 ],
                             ],
                         ],
@@ -349,7 +349,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccountIncomingBuyTasks(goal_user_account_id: {$this->userAccount2->id}) {
                     data {
@@ -376,20 +376,20 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ '
             {
                 userAccountBuyTask(id: 10000000) {
                     id
                 }
             }
-        ")->assertGraphQLErrorMessage('This action is unauthorized.');
+        ')->assertGraphQLErrorMessage('This action is unauthorized.');
     }
 
     public function testGetUserAccountOutgoingBuyTasksByNotExistentUserAccount()
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ '
             {
                 userAccountOutgoingBuyTasks(user_account_id: 10000000) {
                     data {
@@ -409,14 +409,14 @@ class UserAccountBuyTaskTest extends TestCase
                     }
                 }
             }
-        ")->assertGraphQLErrorMessage('This action is unauthorized.');
+        ')->assertGraphQLErrorMessage('This action is unauthorized.');
     }
 
     public function testGetUserAccountIncomingBuyTasksByNotExistentUserAccount()
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ '
             {
                 userAccountIncomingBuyTasks(goal_user_account_id: 10000000) {
                     data {
@@ -436,14 +436,14 @@ class UserAccountBuyTaskTest extends TestCase
                     }
                 }
             }
-        ")->assertGraphQLErrorMessage('This action is unauthorized.');
+        ')->assertGraphQLErrorMessage('This action is unauthorized.');
     }
 
     public function testCreateUserAccountBuyTask()
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: {$this->userAccount1->id}
@@ -490,7 +490,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: {$this->userAccount1->id}
@@ -519,7 +519,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: 10000000
@@ -548,7 +548,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: {$this->userAccount1->id}
@@ -577,7 +577,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: {$this->userAccount2->id}
@@ -606,7 +606,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: {$this->userAccountWithArchivedCurrency->id}
@@ -635,7 +635,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccountBuyTask(input: {
                     user_account_id: {$this->userAccount1->id}
@@ -664,7 +664,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 deleteUserAccountBuyTask(id: {$this->userAccountBuyTask1->id}) {
                     id
@@ -677,20 +677,20 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ '
             mutation {
                 deleteUserAccountBuyTask(id: 10000000) {
                     id
                 }
             }
-        ")->assertGraphQLErrorMessage('Validation failed for the field [deleteUserAccountBuyTask].');
+        ')->assertGraphQLErrorMessage('Validation failed for the field [deleteUserAccountBuyTask].');
     }
 
     public function testDeleteCompletedUserAccountBuy()
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 deleteUserAccountBuyTask(id: {$this->userAccountBuyTask2->id}) {
                     id
@@ -703,7 +703,7 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 deleteUserAccountBuyTask(id: {$this->userAccountBuyTask1->id}) {
                     id

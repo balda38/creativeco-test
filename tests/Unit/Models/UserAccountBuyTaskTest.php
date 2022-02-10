@@ -128,7 +128,8 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $buyTasks = UserAccountBuyTask::forUserAccount($this->userAccount)
             ->orderBy('id')
-            ->get();
+            ->get()
+        ;
         $this->assertCount(4, $buyTasks);
         $this->assertTrue($buyTasks->first()->is($this->expiredUserAccountBuyTask));
         $this->assertEquals($buyTasks->first()->user_account_id, $this->userAccount->id);
@@ -138,7 +139,8 @@ class UserAccountBuyTaskTest extends TestCase
     {
         $buyTasks = UserAccountBuyTask::forGoalUserAccount($this->goalUserAccount)
             ->orderBy('id')
-            ->get();
+            ->get()
+        ;
         $this->assertCount(4, $buyTasks);
         $this->assertTrue($buyTasks->first()->is($this->expiredUserAccountBuyTask));
         $this->assertEquals($buyTasks->first()->goal_user_account_id, $this->goalUserAccount->id);

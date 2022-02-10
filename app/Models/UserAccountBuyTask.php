@@ -88,7 +88,8 @@ class UserAccountBuyTask extends Model implements OwnedModel
         return $query->whereNotNull('buy_before')
             ->where('buy_before', '<=', Carbon::now())
             ->whereNull('completed_at')
-            ->whereNull('canceled_at');
+            ->whereNull('canceled_at')
+        ;
     }
 
     public function scopeCompleted(Builder $query): Builder
@@ -107,8 +108,10 @@ class UserAccountBuyTask extends Model implements OwnedModel
             ->whereNull('canceled_at')
             ->where(function (Builder $query) {
                 $query->whereNull('buy_before')
-                    ->orWhere('buy_before', '>', Carbon::now());
-            });
+                    ->orWhere('buy_before', '>', Carbon::now())
+                ;
+            })
+        ;
     }
 
     public function getOwner(): User
@@ -118,9 +121,9 @@ class UserAccountBuyTask extends Model implements OwnedModel
 
     public function getIsExpired(): bool
     {
-        return !$this->completed_at &&
-            !$this->canceled_at &&
-            $this->buy_before && Carbon::now()->gte($this->buy_before);
+        return !$this->completed_at
+            && !$this->canceled_at
+            && $this->buy_before && Carbon::now()->gte($this->buy_before);
     }
 
     public function getIsCompleted(): bool
@@ -135,9 +138,9 @@ class UserAccountBuyTask extends Model implements OwnedModel
 
     public function getIsWaiting(): bool
     {
-        return !$this->completed_at &&
-            !$this->canceled_at &&
-            !$this->buy_before || (
+        return !$this->completed_at
+            && !$this->canceled_at
+            && !$this->buy_before || (
                 $this->buy_before && Carbon::now()->lt($this->buy_before)
             );
     }

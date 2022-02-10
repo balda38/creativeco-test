@@ -26,10 +26,12 @@ class CurrencyExchangeListener
             ->with('incomingBuyTasks', function (HasMany $query) {
                 $query->waiting()->orderBy('created_at');
             })
-            ->get();
+            ->get()
+        ;
         foreach ($accounts as $account) {
             CompleteUserAccountBuyTasks::dispatch($account, $event->getExchangeRates())
-                ->onQueue('currency-'.$toCurrency->id.'-buy-tasks');
+                ->onQueue('currency-'.$toCurrency->id.'-buy-tasks')
+            ;
         }
     }
 }

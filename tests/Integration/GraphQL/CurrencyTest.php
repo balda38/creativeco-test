@@ -69,7 +69,7 @@ class CurrencyTest extends TestCase
 
     public function testGetTradedCurrencies()
     {
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ '
             {
                 tradedCurrencies {
                     id
@@ -84,7 +84,7 @@ class CurrencyTest extends TestCase
                     }
                 }
             }
-        ");
+        ');
         $this->assertSame($response->json(), [
             'data' => [
                 'tradedCurrencies' => [

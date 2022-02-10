@@ -53,7 +53,8 @@ class CompleteUserAccountBuyTasks implements ShouldQueue
         foreach ($tasks as $task) {
             $fromCurrency = $task->userAccount->currency;
             $exchangeRate = $this->exchangeRates->where('to_currency_id', '=', $fromCurrency->id)
-                ->first();
+                ->first()
+            ;
 
             $exchangeRateSum = $exchangeRate->value * $task->count;
             if ($exchangeRateSum <= $task->getSum() && $exchangeRateSum <= $task->userAccount->value) {

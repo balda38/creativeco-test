@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property int      $id
- * @property int      $user_id
- * @property int      $currency_id
- * @property float    $value       Count of currency
- * @property string   $created_at
- * @property string   $updated_at
- * @property User     $user
- * @property Currency $currency
+ * @property int                                                           $id
+ * @property int                                                           $user_id
+ * @property int                                                           $currency_id
+ * @property float                                                         $value            Count of currency
+ * @property string                                                        $created_at
+ * @property string                                                        $updated_at
+ * @property User                                                          $user
+ * @property Currency                                                      $currency
  * @property \Illuminate\Database\Eloquent\Collection|UserAccountBuyTask[] $outgoingBuyTasks Buy tasks from this account
  * @property \Illuminate\Database\Eloquent\Collection|UserAccountBuyTask[] $incomingBuyTasks Buy tasks to this account
  */

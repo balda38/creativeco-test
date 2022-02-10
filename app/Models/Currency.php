@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property int    $id
- * @property string $name
- * @property string $code
- * @property bool   $archived   Currency no longer traded
- * @property string $created_at
- * @property string $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|CurrencyExchangeRates[] $exchangeRates
- * @property \Illuminate\Database\Eloquent\Collection|CurrencyExchangeRates[] $exchangeRatesReverse
+ * @property int                                                              $id
+ * @property string                                                           $name
+ * @property string                                                           $code
+ * @property bool                                                             $archived             Currency no longer traded
+ * @property string                                                           $created_at
+ * @property string                                                           $updated_at
+ * @property CurrencyExchangeRates[]|\Illuminate\Database\Eloquent\Collection $exchangeRates
+ * @property CurrencyExchangeRates[]|\Illuminate\Database\Eloquent\Collection $exchangeRatesReverse
  */
 class Currency extends Model
 {

@@ -64,7 +64,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccount(id: {$this->userAccount1->id}) {
                     id
@@ -79,7 +79,7 @@ class UserAccountTest extends TestCase
                 'userAccount' => [
                     'id' => (string) $this->userAccount1->id,
                     'currency' => [
-                        'id' => (string) $this->currency->id
+                        'id' => (string) $this->currency->id,
                     ],
                 ],
             ],
@@ -90,7 +90,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             {
                 testUserAccount(id: {$this->userAccount1->id}) {
                     id
@@ -106,7 +106,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccount(id: {$this->userAccount1->id}) {
                     id
@@ -122,7 +122,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccounts(user_id: {$this->user->id}) {
                     data {
@@ -141,13 +141,13 @@ class UserAccountTest extends TestCase
                         [
                             'id' => (string) $this->userAccount1->id,
                             'currency' => [
-                                'id' => (string) $this->currency->id
+                                'id' => (string) $this->currency->id,
                             ],
                         ],
                         [
                             'id' => (string) $this->userAccount2->id,
                             'currency' => [
-                                'id' => (string) $this->currency->id
+                                'id' => (string) $this->currency->id,
                             ],
                         ],
                     ],
@@ -160,7 +160,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             {
                 userAccounts(user_id: {$this->user->id}) {
                     data {
@@ -178,7 +178,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ '
             {
                 userAccount(id: 10000000) {
                     id
@@ -187,14 +187,14 @@ class UserAccountTest extends TestCase
                     }
                 }
             }
-        ")->assertGraphQLErrorMessage('This action is unauthorized.');
+        ')->assertGraphQLErrorMessage('This action is unauthorized.');
     }
 
     public function testGetUserAccountsByNotExistentUser()
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ '
             {
                 userAccounts(user_id: 10000000) {
                     data {
@@ -205,14 +205,14 @@ class UserAccountTest extends TestCase
                     }
                 }
             }
-        ")->assertGraphQLErrorMessage('This action is unauthorized.');
+        ')->assertGraphQLErrorMessage('This action is unauthorized.');
     }
 
     public function testCreateUserAccount()
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccount(input: {
                     user_id: {$this->user->id}
@@ -234,7 +234,7 @@ class UserAccountTest extends TestCase
                         'id' => (string) $this->user->id,
                     ],
                     'currency' => [
-                        'id' => (string) $this->currency->id
+                        'id' => (string) $this->currency->id,
                     ],
                 ],
             ],
@@ -245,7 +245,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccount(input: {
                     user_id: {$this->user->id}
@@ -266,7 +266,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccount(input: {
                     user_id: {$this->user->id}
@@ -287,7 +287,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccount(input: {
                     user_id: 10000000
@@ -303,7 +303,7 @@ class UserAccountTest extends TestCase
             }
         ")->assertGraphQLErrorMessage('Validation failed for the field [createUserAccount].');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 createUserAccount(input: {
                     user_id: {$this->user->id}
@@ -324,7 +324,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $response = $this->graphQL(/** @lang GraphQL */ "
+        $response = $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 topUpUserAccount(input: {
                     id: {$this->userAccount1->id}
@@ -349,7 +349,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 topUpUserAccount(input: {
                     id: {$this->userAccount1->id}
@@ -366,7 +366,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->otherUser, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ "
             mutation {
                 topUpUserAccount(input: {
                     id: {$this->userAccount1->id}
@@ -383,7 +383,7 @@ class UserAccountTest extends TestCase
     {
         $this->be($this->user, 'api');
 
-        $this->graphQL(/** @lang GraphQL */ "
+        $this->graphQL(/* @lang GraphQL */ '
             mutation {
                 topUpUserAccount(input: {
                     id: 10000000
@@ -393,6 +393,6 @@ class UserAccountTest extends TestCase
                     value
                 }
             }
-        ")->assertGraphQLErrorMessage('Validation failed for the field [topUpUserAccount].');
+        ')->assertGraphQLErrorMessage('Validation failed for the field [topUpUserAccount].');
     }
 }

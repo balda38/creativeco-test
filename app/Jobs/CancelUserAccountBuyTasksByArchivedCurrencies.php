@@ -30,7 +30,7 @@ class CancelUserAccountBuyTasksByArchivedCurrencies implements ShouldQueue
     public $tries = 5;
 
     /**
-     * @var Collection|App\Models\Currency[]
+     * @var App\Models\Currency[]|Collection
      */
     private $archivedCurrencies;
 
@@ -55,6 +55,7 @@ class CancelUserAccountBuyTasksByArchivedCurrencies implements ShouldQueue
             ->orWhereHas('goalUserAccount', function (Builder $query) use ($archivedCurrenciesIds) {
                 $query->whereIn('currency_id', $archivedCurrenciesIds);
             })
-            ->update(['canceled_at' => Carbon::now()]);
+            ->update(['canceled_at' => Carbon::now()])
+        ;
     }
 }

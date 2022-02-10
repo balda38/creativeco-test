@@ -15,6 +15,7 @@ class TradedCurrencies
         return Currency::isArchived(false)
             ->has('exchangeRates')
             ->orderBy('id')
-            ->get();
+            ->get()
+        ;
     }
 }

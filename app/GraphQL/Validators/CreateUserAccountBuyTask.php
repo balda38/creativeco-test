@@ -18,7 +18,7 @@ class CreateUserAccountBuyTask extends Validator
                 'required',
                 'numeric',
                 'gt:0',
-                function  ($attr, $value, $fail) use ($userAccount) {
+                function ($attr, $value, $fail) use ($userAccount) {
                     if (!$userAccount) {
                         $fail('The selected '.$attr.' is invalid.');
                     } elseif ($userAccount->currency->archived) {

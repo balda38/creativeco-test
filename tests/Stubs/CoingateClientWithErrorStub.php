@@ -11,7 +11,7 @@ class CoingateClientWithErrorStub
                 // field 'title' is missing
                 'symbol' => 'EUR',
                 'disabled' => false,
-            ]
+            ],
         ];
     }
 

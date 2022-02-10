@@ -11,7 +11,7 @@ class CoingateClientStub
                 'title' => 'Euro',
                 'symbol' => 'EUR',
                 'disabled' => false,
-            ]
+            ],
         ];
     }
 

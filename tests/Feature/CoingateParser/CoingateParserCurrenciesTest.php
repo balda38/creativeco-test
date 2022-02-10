@@ -36,7 +36,7 @@ class CoingateParserCurrenciesTest extends TestCase
     {
         parent::tearDown();
 
-        app()->bind('coingateClient', function() {
+        app()->bind('coingateClient', function () {
             return new \Balda38\CoingateExchangeClient\Client();
         });
 
@@ -45,7 +45,7 @@ class CoingateParserCurrenciesTest extends TestCase
 
     public function testCurrenciesParse()
     {
-        app()->bind('coingateClient', function() {
+        app()->bind('coingateClient', function () {
             return new CoingateClientStub();
         });
         Currencies::parse();
@@ -62,7 +62,7 @@ class CoingateParserCurrenciesTest extends TestCase
     public function testCurrenciesWithErrorParse()
     {
         $this->expectException(CoingateParserException::class);
-        app()->bind('coingateClient', function() {
+        app()->bind('coingateClient', function () {
             return new CoingateClientWithErrorStub();
         });
         Currencies::parse();
